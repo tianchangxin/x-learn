@@ -9,6 +9,9 @@
     <version>${revision}</version>
 
     <packaging>pom</packaging>
+    <modules>
+        <module>learn-common</module>
+    </modules>
 
 
     <properties>
