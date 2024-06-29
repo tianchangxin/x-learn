@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>learn-common</module>
+        <module>learn-design-pattern</module>
     </modules>
 
 
