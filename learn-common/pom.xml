@@ -6,7 +6,7 @@
     <parent>
         <groupId>cn.xin.learn</groupId>
         <artifactId>java-learn</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>learn-common</artifactId>
