@@ -52,6 +52,7 @@
 <!--        <hadoop-common-shaded.version>1.1.3_shaded</hadoop-common-shaded.version>-->
         <alibaba.fastjson2.extension.version>2.0.22</alibaba.fastjson2.extension.version>
         <belerweb.pinyin4j.version>2.5.0</belerweb.pinyin4j.version>
+        <junit.version>4.13.1</junit.version>
 
     </properties>
 
@@ -330,6 +331,13 @@
                 <groupId>com.belerweb</groupId>
                 <artifactId>pinyin4j</artifactId>
                 <version>${belerweb.pinyin4j.version}</version>
+            </dependency>
+
+            <!-- junit -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
             </dependency>
 
         </dependencies>
