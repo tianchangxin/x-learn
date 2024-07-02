@@ -1,4 +1,4 @@
-# Java-Learn
+# X-Learn
 
 i need 自由
 
@@ -25,12 +25,9 @@ i need 自由
 1.controller层返回vo
 在controller层，将DTO转换成vo，返回给前端
 
-
 2.数据库对象使用po(Persistent object 或者do)
 
-
 3.service层返回DTO (Data Transfer Objec)
-
 
 4.bo为业务实体
 通常在service层，将po转换成bo， bo转换成dto返回
