@@ -17,6 +17,7 @@
         <module>learn-framework</module>
         <module>learn-design-pattern</module>
         <module>learn-server</module>
+        <module>learn-dependency</module>
     </modules>
 
 
