@@ -1,10 +1,13 @@
 package cn.xin.learn.design.behavioral.simpleFactory;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author tiancx
  * @description: 简单工厂模式
  * @date 2024年06月30日
  */
+@Slf4j
 public class SimpleFactory {
     /**
      * 根据传入的类获取对应的实例
@@ -16,8 +19,7 @@ public class SimpleFactory {
         try {
             return clazz.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
-            //todo 换成日志
-            System.out.println("SimpleFactory getBean 实例化失败"+e.getMessage());
+            log.info("SimpleFactory getBean 实例化失败:{}",e.getMessage());
         }
         return null;
     }
