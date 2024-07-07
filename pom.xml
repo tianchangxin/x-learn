@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.xin.learn</groupId>
-    <artifactId>java-learn</artifactId>
+    <artifactId>x-learn</artifactId>
     <version>${revision}</version>
 
     <packaging>pom</packaging>
