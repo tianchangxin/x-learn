@@ -1,22 +1,25 @@
 package cn.xin.learn.design.behavioral.simpleFactory.biz;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author tiancx
  * @description: 用户服务-简单工厂模式
  * @date 2024年06月30日
  */
+@Slf4j
 public class UserService {
     /**
      * 添加用户
      */
     public void add() {
-        System.out.println("添加用户");
+        log.info("添加用户");
     }
 
     /**
      * 删除用户
      */
     public void delete() {
-        System.out.println("删除用户");
+        log.info("删除用户");
     }
 }
