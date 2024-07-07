@@ -6,7 +6,7 @@
 
     <groupId>cn.xin.learn</groupId>
     <artifactId>learn-dependency</artifactId>
-    <name>java-learn-dependency</name>
+    <name>learn-dependency</name>
     <version>${revision}</version>
 
     <packaging>pom</packaging>
@@ -176,6 +176,7 @@
                 <version>${disruptor.version}</version>
             </dependency>
 
+
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-api</artifactId>
@@ -340,7 +341,14 @@
                 <version>${junit.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>cn.xin.learn</groupId>
+                <artifactId>framework-log</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
         </dependencies>
+
 
 
     </dependencyManagement>

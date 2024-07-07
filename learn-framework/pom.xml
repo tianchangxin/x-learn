@@ -9,9 +9,15 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>learn-design-pattern</artifactId>
-    <packaging>jar</packaging>
-    <description>设计模式模块</description>
+    <artifactId>learn-framework</artifactId>
+    <packaging>pom</packaging>
+
+    <description>项目框架组件</description>
+
+    <modules>
+        <module>framework-log</module>
+    </modules>
+
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -19,24 +25,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-
-
-        <dependency>
-            <groupId>cn.xin.learn</groupId>
-            <artifactId>framework-log</artifactId>
-        </dependency>
-
-    </dependencies>
 
 </project>

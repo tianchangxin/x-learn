@@ -5,13 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>cn.xin.learn</groupId>
-        <artifactId>java-learn</artifactId>
+        <artifactId>learn-framework</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>learn-design-pattern</artifactId>
+    <artifactId>framework-log</artifactId>
     <packaging>jar</packaging>
-    <description>设计模式模块</description>
+    <description>日志组件</description>
+
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -20,10 +21,15 @@
     </properties>
 
     <dependencies>
+
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
         <dependency>
@@ -31,11 +37,11 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
-
         <dependency>
-            <groupId>cn.xin.learn</groupId>
-            <artifactId>framework-log</artifactId>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
         </dependency>
+
 
     </dependencies>
 
