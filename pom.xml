@@ -9,8 +9,12 @@
     <version>${revision}</version>
 
     <packaging>pom</packaging>
+
+    <description>java学习</description>
+
     <modules>
         <module>learn-common</module>
+        <module>learn-framework</module>
         <module>learn-design-pattern</module>
     </modules>
 
