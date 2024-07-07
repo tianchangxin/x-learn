@@ -16,6 +16,7 @@
         <module>learn-common</module>
         <module>learn-framework</module>
         <module>learn-design-pattern</module>
+        <module>learn-server</module>
     </modules>
 
 
