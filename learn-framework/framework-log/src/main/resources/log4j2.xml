@@ -7,16 +7,18 @@
     <Properties>
         <!-- 格式化输出：%date表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %msg：日志消息，%n是换行符-->
         <!-- %logger{36} 表示 Logger 名字最长36个字符 -->
-        <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level &lt;x-learn&gt; %C{1}.%M &lt;%X{filter1}&gt;  &lt;%X{filter2}&gt; LINE:%L - %msg%xEx%n" />
+        <!-- 配色教程 %style{内容}{颜色} -->
+        <property name="CLASS_PATH" value="%style{%C{1}.%M}{blue}"/>
+        <property name="TIME" value="%d{yyyy-MM-dd HH:mm:ss.SSS}"/>
+        <property name="LOG_PATTERN" value="${TIME} [%thread] %-5level &lt;x-learn&gt; ${CLASS_PATH} LINE:%L - %msg%xEx%n" />
 
         <!-- 定义日志存储的路径 -->
 <!--        <property name="FILE_PATH" value="/Users/tiancx/work/" />-->
 <!--        <property name="FILE_NAME" value="learn_log_info" />-->
     </Properties>
-
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-                <PatternLayout pattern="${LOG_PATTERN}" />
+                <PatternLayout pattern="${LOG_PATTERN}"/>
         </Console>
 
 
