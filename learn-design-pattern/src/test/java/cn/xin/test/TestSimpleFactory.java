@@ -3,7 +3,7 @@ package cn.xin.test;
 import cn.xin.learn.design.behavioral.simpleFactory.SimpleFactory;
 import cn.xin.learn.design.behavioral.simpleFactory.biz.MoneyService;
 import cn.xin.learn.design.behavioral.simpleFactory.biz.UserService;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author tiancx
