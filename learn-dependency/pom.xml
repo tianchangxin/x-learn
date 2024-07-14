@@ -51,7 +51,7 @@
 <!--        <hadoop-common-shaded.version>1.1.3_shaded</hadoop-common-shaded.version>-->
         <alibaba.fastjson2.extension.version>2.0.22</alibaba.fastjson2.extension.version>
         <belerweb.pinyin4j.version>2.5.0</belerweb.pinyin4j.version>
-        <junit.version>4.13.1</junit.version>
+        <junit.version>5.7.0</junit.version>
 
     </properties>
 
@@ -336,9 +336,17 @@
 
             <!-- junit -->
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
                 <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
             </dependency>
 
             <dependency>

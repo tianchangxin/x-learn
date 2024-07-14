@@ -5,27 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>cn.xin.learn</groupId>
-        <artifactId>x-learn</artifactId>
+        <artifactId>learn-framework</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>learn-framework</artifactId>
-    <packaging>pom</packaging>
-
-    <description>项目框架组件</description>
-
-    <modules>
-        <module>framework-log</module>
-        <module>framework-mybatisplus-starter</module>
-    </modules>
-
+    <artifactId>framework-mybatisplus-starter</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-
 
 </project>
