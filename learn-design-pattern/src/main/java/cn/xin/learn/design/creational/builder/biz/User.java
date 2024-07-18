@@ -1,5 +1,7 @@
 package cn.xin.learn.design.creational.builder.biz;
 
+import cn.xin.learn.design.creational.builder.core.UserBuilder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -8,6 +10,7 @@ import lombok.Data;
  * @date 2024年07月18日
  */
 @Data
+@AllArgsConstructor
 public class User {
     /**
      * 用户名
@@ -19,22 +22,8 @@ public class User {
      */
     private Integer age;
 
-    public static User builder(){
-        return new User();
-    }
-
-    public User name(String name){
-        this.name = name;
-        return this;
-    }
-
-    public User age(Integer age){
-        this.age = age;
-        return this;
-    }
-
-    public User build(){
-        return this;
+    public static UserBuilder builder(){
+        return new UserBuilder();
     }
 
 }
