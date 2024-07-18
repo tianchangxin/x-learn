@@ -1,5 +1,6 @@
-package cn.xin.learn.design.behavioral.simpleFactory.biz;
+package cn.xin.learn.design.creational.abstractFactory.biz;
 
+import cn.xin.learn.design.creational.abstractFactory.core.Service;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -8,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2024年06月30日
  */
 @Slf4j
-public class UserService {
+public class UserService implements Service {
     /**
      * 添加用户
      */

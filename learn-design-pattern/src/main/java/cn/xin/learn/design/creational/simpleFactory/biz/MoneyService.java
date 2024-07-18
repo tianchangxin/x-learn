@@ -1,4 +1,4 @@
-package cn.xin.learn.design.behavioral.simpleFactory.biz;
+package cn.xin.learn.design.creational.simpleFactory.biz;
 
 
 import lombok.extern.slf4j.Slf4j;
