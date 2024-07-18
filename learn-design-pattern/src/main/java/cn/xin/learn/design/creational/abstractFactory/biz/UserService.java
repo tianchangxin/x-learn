@@ -1,6 +1,6 @@
-package cn.xin.learn.design.behavioral.abstractFactory.biz;
+package cn.xin.learn.design.creational.abstractFactory.biz;
 
-import cn.xin.learn.design.behavioral.abstractFactory.core.Service;
+import cn.xin.learn.design.creational.abstractFactory.core.Service;
 import lombok.extern.slf4j.Slf4j;
 
 /**

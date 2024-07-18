@@ -1,7 +1,6 @@
-package cn.xin.learn.design.behavioral.abstractFactory.biz;
+package cn.xin.learn.design.creational.simpleFactory.biz;
 
 
-import cn.xin.learn.design.behavioral.abstractFactory.core.Service;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -10,18 +9,18 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2024年06月30日
  */
 @Slf4j
-public class MoneyService implements Service {
+public class MoneyService {
     /**
      * 充值
      */
-    public void add() {
+    public void recharge() {
         log.info("充值");
     }
 
     /**
      * 提现
      */
-    public void delete() {
+    public void withdraw() {
         log.info("提现");
     }
 }

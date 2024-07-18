@@ -1,4 +1,4 @@
-package cn.xin.learn.design.behavioral.abstractFactory.core;
+package cn.xin.learn.design.creational.abstractFactory.core;
 
 /**
  * @author tiancx

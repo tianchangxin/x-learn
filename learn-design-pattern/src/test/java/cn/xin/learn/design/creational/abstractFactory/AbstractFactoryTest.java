@@ -1,9 +1,9 @@
-package cn.xin.learn.design.behavioral.abstractFactory;
+package cn.xin.learn.design.creational.abstractFactory;
 
-import cn.xin.learn.design.behavioral.abstractFactory.biz.MoneyServiceFactory;
-import cn.xin.learn.design.behavioral.abstractFactory.biz.UserServiceFactory;
-import cn.xin.learn.design.behavioral.abstractFactory.core.AbstractFactory;
-import cn.xin.learn.design.behavioral.abstractFactory.core.Service;
+import cn.xin.learn.design.creational.abstractFactory.biz.MoneyServiceFactory;
+import cn.xin.learn.design.creational.abstractFactory.biz.UserServiceFactory;
+import cn.xin.learn.design.creational.abstractFactory.core.AbstractFactory;
+import cn.xin.learn.design.creational.abstractFactory.core.Service;
 import org.junit.jupiter.api.Test;
 
 /**

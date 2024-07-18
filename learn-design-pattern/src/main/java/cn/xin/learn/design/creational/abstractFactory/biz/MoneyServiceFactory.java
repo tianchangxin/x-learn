@@ -1,7 +1,7 @@
-package cn.xin.learn.design.behavioral.abstractFactory.biz;
+package cn.xin.learn.design.creational.abstractFactory.biz;
 
-import cn.xin.learn.design.behavioral.abstractFactory.core.AbstractFactory;
-import cn.xin.learn.design.behavioral.abstractFactory.core.Service;
+import cn.xin.learn.design.creational.abstractFactory.core.AbstractFactory;
+import cn.xin.learn.design.creational.abstractFactory.core.Service;
 
 /**
  * @author tiancx
