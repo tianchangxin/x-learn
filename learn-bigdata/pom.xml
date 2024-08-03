@@ -11,7 +11,7 @@
 
     <packaging>pom</packaging>
 
-    <artifactId>learn-bigdate</artifactId>
+    <artifactId>learn-bigdata</artifactId>
     <description>大数据学习模块</description>
 
     <modules>

@@ -32,7 +32,7 @@
         <java-jwt.version>3.19.2</java-jwt.version>
         <feign.version>10.1.0</feign.version>
         <knife4j.version>4.3.0</knife4j.version>
-        <hutool.version>5.8.20</hutool.version>
+        <hutool.version>5.8.29</hutool.version>
         <disruptor.version>3.4.2</disruptor.version>
         <commons-collections4>4.4</commons-collections4>
         <commons-lang3>3.12.0</commons-lang3>
