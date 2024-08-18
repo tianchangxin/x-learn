@@ -19,6 +19,7 @@
         <module>learn-server</module>
         <module>learn-dependency</module>
         <module>learn-bigdata</module>
+        <module>learn-java</module>
     </modules>
 
 
