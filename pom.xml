@@ -20,6 +20,7 @@
         <module>learn-dependency</module>
         <module>learn-bigdata</module>
         <module>learn-java</module>
+        <module>learn-mybatis</module>
     </modules>
 
 
