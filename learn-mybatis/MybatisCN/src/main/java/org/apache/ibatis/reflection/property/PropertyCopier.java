@@ -56,6 +56,7 @@ public final class PropertyCopier {
           }
         } catch (Exception e) {
           // Nothing useful to do, will only fail on final fields, which will be ignored.
+          // 捕获非IllegalAccessException 的异常。对于不可修改的 final 字段，可以直接忽略相关异常，避免程序中断。
         }
       }
       parent = parent.getSuperclass();
