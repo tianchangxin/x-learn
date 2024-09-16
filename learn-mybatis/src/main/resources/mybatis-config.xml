@@ -7,6 +7,10 @@
     <!--引入外部的jdbc.properties-->
     <properties resource="jdbc.properties"/>
 
+    <settings>
+        <setting name="localCacheScope" value="SESSION"/>
+    </settings>
+
     <environments default="development">
         <environment id="development">
             <!--配置事务管理器-->
@@ -38,4 +42,5 @@
     <mappers>
         <mapper resource="mapper/UserMapper.xml"/>
     </mappers>
+
 </configuration>

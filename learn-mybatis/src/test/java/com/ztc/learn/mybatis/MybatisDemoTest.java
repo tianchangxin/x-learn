@@ -37,7 +37,6 @@ public class MybatisDemoTest {
     @Test
     public void testSimpleDemo() {
         String source = "mybatis-config.xml";
-
         InputStream inputStream = null;
         try{
             inputStream = Resources.getResourceAsStream(source);
@@ -46,10 +45,10 @@ public class MybatisDemoTest {
         }
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         try(SqlSession session = sqlSessionFactory.openSession()){
-            log.info("连接成功");
+            log.info("✨连接成功");
             UserMapper mapper = session.getMapper(UserMapper.class);
-            List<User> admin = mapper.queryUserByRole("1");
-            log.info("admin = {}", admin);
+            List<User> jerry = mapper.queryUser(1, "Jerry", "123");
+            log.info("admin = {}", jerry);
         };
     }
 }
