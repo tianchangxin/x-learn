@@ -8,6 +8,7 @@ import org.springframework.aop.framework.AopContext;
  * @date 2024年09月02日
  */
 public interface ProxyService<T> {
+    @SuppressWarnings("unchecked")
     default T getProxy(){
         return (T) AopContext.currentProxy();
     }
