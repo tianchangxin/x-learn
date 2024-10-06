@@ -7,9 +7,17 @@
     <!--引入外部的jdbc.properties-->
     <properties resource="jdbc.properties"/>
 
+
     <settings>
         <setting name="localCacheScope" value="SESSION"/>
     </settings>
+
+    <plugins>
+        <plugin interceptor="com.ztc.learn.mybatis.plugins.CountPlug">
+            <!-- 插件的属性 -->
+        </plugin>
+    </plugins>
+
 
     <environments default="development">
         <environment id="development">
@@ -39,8 +47,13 @@
             </dataSource>
         </environment>
     </environments>
+
+
+
+
     <mappers>
         <mapper resource="mapper/UserMapper.xml"/>
     </mappers>
 
 </configuration>
+
