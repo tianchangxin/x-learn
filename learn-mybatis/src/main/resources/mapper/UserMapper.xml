@@ -50,6 +50,9 @@
     <select id="queryUserById" resultType="com.ztc.learn.mybatis.modle.domain.User">
         select * from user where id = #{id}
     </select>
+    <select id="queryUserPre" parameterType="integer" resultType="com.ztc.learn.mybatis.modle.domain.User">
+        select * from user where id = #{id}
+    </select>
 
 
 </mapper>

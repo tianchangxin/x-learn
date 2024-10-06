@@ -23,6 +23,11 @@ public interface UserMapper {
     User queryUserById(Integer id);
 
     boolean updateUserNameById(@Param("id") Integer id, @Param("username") String username);
+
+    /**
+     * 测试预处理
+     */
+    User queryUserPre(@Param("id") Integer id);
 }
 
 
