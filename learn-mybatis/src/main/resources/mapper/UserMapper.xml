@@ -25,6 +25,15 @@
         sex,real_name,role,
         create_time,update_time
     </sql>
+    <insert id="insertUser">
+        insert into user
+        (username,password,email,phone)
+        values
+        <foreach collection="list" item="user" index="index" separator=",">
+            (#{user.username},#{user.password},#{user.email},#{user.phone})
+        </foreach>
+    </insert>
+
     <update id="updateUserNameById">
         update user
         set username = #{username}
@@ -42,8 +51,11 @@
 
        select * from user
        <where>
-           <if test="arg0 != null and arg0 != ''">
-                id = #{arg0}
+           <if test="id != null and id != ''">
+                id = #{id}
+           </if>
+           <if test="username != null and username != ''">
+                 and username != #{username}
            </if>
        </where>
     </select>

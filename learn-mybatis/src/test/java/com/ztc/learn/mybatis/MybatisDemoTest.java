@@ -51,4 +51,27 @@ public class MybatisDemoTest {
             log.info("admin = {}", jerry);
         };
     }
+
+
+    @Test
+    public void testSession() {
+        String source = "mybatis-config.xml";
+        InputStream inputStream = null;
+        try{
+            inputStream = Resources.getResourceAsStream(source);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        try(SqlSession session = sqlSessionFactory.openSession()){
+            log.info("✨连接成功");
+            //设置查询参数
+            User user = new User();
+            user.setId(1);
+            user.setUsername("Jerry");
+            String statement = "com.ztc.learn.mybatis.mapper.UserMapper.queryUser";
+            List<Object> list = session.selectList(statement, user);
+            log.info("list = {}", list);
+        };
+    }
 }

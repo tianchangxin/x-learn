@@ -14,4 +14,9 @@ public interface UserService{
 
     List<User> getUserByRole(String role);
 
+    /**
+     * 插入模拟用户数据
+     */
+    void insertUser();
+
 }

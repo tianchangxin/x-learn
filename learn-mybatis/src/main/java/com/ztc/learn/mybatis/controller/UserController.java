@@ -21,4 +21,10 @@ public class UserController {
     public List<User> getUserByRole(String role){
         return userService.getUserByRole(role);
     }
+
+    @GetMapping(value = "insert")
+    public String insertUser(){
+        userService.insertUser();
+        return "插入成功";
+    }
 }

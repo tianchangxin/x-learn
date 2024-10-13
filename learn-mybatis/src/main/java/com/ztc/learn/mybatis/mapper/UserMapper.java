@@ -28,6 +28,11 @@ public interface UserMapper {
      * 测试预处理
      */
     User queryUserPre(@Param("id") Integer id);
+
+    /**
+     * 插入用户 - 测试使用
+     */
+    void insertUser(@Param("list") List<User> list);
 }
 
 
