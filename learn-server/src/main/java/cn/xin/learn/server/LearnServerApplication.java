@@ -3,6 +3,8 @@ package cn.xin.learn.server;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+
 /**
  * @author tiancx
  * @description: 启动类
@@ -10,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @Slf4j
+@EnableAspectJAutoProxy(exposeProxy = true)
 public class LearnServerApplication {
     public static void main(String[] args) {
         log.info("开始启动");
