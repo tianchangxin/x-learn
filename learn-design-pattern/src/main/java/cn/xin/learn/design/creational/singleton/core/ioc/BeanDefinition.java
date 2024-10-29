@@ -1,7 +1,6 @@
 package cn.xin.learn.design.creational.singleton.core.ioc;
 
 import lombok.Data;
-import org.springframework.beans.PropertyValues;
 
 /**
  * @author tiancx
@@ -15,10 +14,6 @@ public class BeanDefinition {
      */
     private Class<?> beanClass;
 
-    /**
-     * class 属性值
-     */
-    private PropertyValues propertyValues;
 
     /**
      * 通过反射 初始化方法名称
