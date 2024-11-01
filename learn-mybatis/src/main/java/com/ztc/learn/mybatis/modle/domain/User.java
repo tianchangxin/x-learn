@@ -7,10 +7,14 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Random;
 
+import java.util.Date;
+
+
 /**
  * 
  * @TableName user
  */
+@Data
 
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -68,6 +72,7 @@ public class User implements Serializable {
      * 更新时间
      */
     private Date updateTime;
+
 
     public Integer getId() {
         return id;
@@ -262,7 +267,6 @@ public class User implements Serializable {
     public static void main(String[] args) {
         System.out.println(getInstance());
     }
-
 
 
 }
