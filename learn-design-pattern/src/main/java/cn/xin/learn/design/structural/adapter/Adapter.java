@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author tiancx
- * @description: TODO
+ * @description: 适配器模式-适配器
  * @date 2024年08月30日
  */
 @Slf4j
