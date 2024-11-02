@@ -37,8 +37,8 @@ public interface UserMapper {
      */
     void insertUser(@Param("list") List<User> list);
 
-    public List<User> queryUserByRole(String role);
 
+    User queryUserByName(@Param("name") String name);
 }
 
 
