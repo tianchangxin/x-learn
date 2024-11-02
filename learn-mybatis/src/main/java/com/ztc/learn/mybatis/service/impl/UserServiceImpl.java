@@ -4,12 +4,17 @@ import com.ztc.learn.mybatis.mapper.UserMapper;
 import com.ztc.learn.mybatis.modle.domain.User;
 import com.ztc.learn.mybatis.service.UserService;
 import lombok.RequiredArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author Jerry
@@ -18,7 +23,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 @Service
 @RequiredArgsConstructor
+
 @Slf4j
+
 public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
@@ -27,6 +34,7 @@ public class UserServiceImpl implements UserService {
     public List<User> getUserByRole(String role) {
         return userMapper.queryUserByRole(role);
     }
+
 
     /**
      * 插入模拟用户数据
