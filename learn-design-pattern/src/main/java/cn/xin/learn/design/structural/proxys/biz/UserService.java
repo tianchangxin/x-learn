@@ -1,4 +1,4 @@
-package cn.xin.learn.design.structural.proxys.statics;
+package cn.xin.learn.design.structural.proxys.biz;
 
 /**
  * @author tiancx

@@ -1,6 +1,7 @@
 package cn.xin.learn.design.structural.proxys.statics;
 
-import cn.xin.learn.design.structural.proxys.statics.impl.UserServiceImpl;
+import cn.xin.learn.design.structural.proxys.biz.UserService;
+import cn.xin.learn.design.structural.proxys.biz.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -9,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2024年11月02日
  */
 @Slf4j
-public class UserServiceProxy implements UserService{
+public class UserServiceProxy implements UserService {
     private final UserService userService = new UserServiceImpl();
     @Override
     public String talk() {

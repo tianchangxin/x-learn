@@ -1,6 +1,5 @@
-package cn.xin.learn.design.structural.proxys.statics.impl;
+package cn.xin.learn.design.structural.proxys.biz;
 
-import cn.xin.learn.design.structural.proxys.statics.UserService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
