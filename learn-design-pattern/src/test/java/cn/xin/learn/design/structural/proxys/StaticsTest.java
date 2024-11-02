@@ -1,6 +1,6 @@
 package cn.xin.learn.design.structural.proxys;
 
-import cn.xin.learn.design.structural.proxys.statics.UserService;
+import cn.xin.learn.design.structural.proxys.biz.UserService;
 import cn.xin.learn.design.structural.proxys.statics.UserServiceProxy;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
