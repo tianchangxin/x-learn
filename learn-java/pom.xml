@@ -34,6 +34,17 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.xin.learn</groupId>
+            <artifactId>framework-log</artifactId>
+        </dependency>
+
+
     </dependencies>
 
 </project>
