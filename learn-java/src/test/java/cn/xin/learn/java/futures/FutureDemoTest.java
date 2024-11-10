@@ -1,12 +1,10 @@
 package cn.xin.learn.java.futures;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-
+import java.util.function.BiFunction;
 /**
  * @author tiancx
  * @description: FutureDemoTest
@@ -126,6 +124,86 @@ public class FutureDemoTest {
         });
         accept.get();
         log.info("主线程结束");
+
+    }
+
+    /**
+     * thenCombine
+     */
+    @Test
+    public void testThenCombine() throws Exception {
+        log.info("主线程开始");
+        CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            log.info("supplyAsync future1");
+            return " hello ";
+        });
+        CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            log.info("supplyAsync future2");
+            return " future ";
+        });
+        CompletableFuture<String> thenCombine = future1.thenCombine(future2, new BiFunction<String, String, String>() {
+            /**
+             * Applies this function to the given arguments.
+             *
+             * @param s1  the first function argument
+             * @param s2 the second function argument
+             * @return the function result
+             */
+            @Override
+            public String apply(String s1, String s2) {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                log.info("thenCombine s1:{},s2:{}", s1 , s2);
+                return s1 + s2;
+            }
+        });
+        String res = thenCombine.get();
+        log.info("res={}", res);
+    }
+
+    /**
+     * thenCompose
+     */
+    @Test
+    public void testThenCompose() throws Exception {
+        log.info("主线程开始");
+        CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            log.info("supplyAsync future1");
+            return " hello ";
+        });
+
+        CompletableFuture<String> thenCompose = future1.thenCompose(s -> {
+            log.info("thenCompose s:{}", s);
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                log.info("thenCompose future2");
+                return s + " future ";
+            });
+        });
+        String res = thenCompose.get();
+        log.info("res={}", res);
 
     }
 
