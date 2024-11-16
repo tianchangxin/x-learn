@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Environment -> Environment:  socketTextStream(String hostname, int port)
+Environment -> Environment: socketTextStream(String hostname, int port, String delimiter)
+Environment -> Environment: socketTextStream(String hostname, int port, String delimiter, long maxRetry)
+Environment -> SocketTextStreamFunction: create
+SocketTextStreamFunction -> SocketTextStreamFunction: create
+Environment <-- SocketTextStreamFunction
+Environment -> Environment: addSource
+Environment -> Environment: addSource
+Environment -> Environment: addSource
+Environment -> Environment: getTypeInfo
+Environment -> StreamSource: create
+StreamSource -> StreamSource: create
+StreamSource -> AbstractUdfStreamOperator: create
+StreamSource <-- AbstractUdfStreamOperator
+Environment <-- StreamSource
+Environment -> DataStreamSource: create
+DataStreamSource -> LegacySourceTransformation: create
+LegacySourceTransformation -> PhysicalTransformation: create
+PhysicalTransformation -> Transformation: create
+PhysicalTransformation <-- Transformation
+LegacySourceTransformation <-- PhysicalTransformation
+DataStreamSource <-- LegacySourceTransformation
+DataStreamSource -> SingleOutputStreamOperator:create
+
+SingleOutputStreamOperator -> DataStream:create
+SingleOutputStreamOperator <-- DataStream
+DataStreamSource <-- SingleOutputStreamOperator
+Environment <-- DataStreamSource
+
+@enduml
