@@ -8,7 +8,6 @@
     <properties resource="jdbc.properties"/>
 
 
-
     <settings>
         <setting name="localCacheScope" value="SESSION"/>
     </settings>
@@ -18,7 +17,6 @@
             <!-- 插件的属性 -->
         </plugin>
     </plugins>
-
 
 
     <environments default="development">
@@ -51,17 +49,9 @@
     </environments>
 
 
-
-
-
     <mappers>
         <mapper resource="mapper/UserMapper.xml"/>
     </mappers>
 
-</configuration>
-
-    <mappers>
-        <mapper resource="mapper/UserMapper.xml"/>
-    </mappers>
 </configuration>
 
