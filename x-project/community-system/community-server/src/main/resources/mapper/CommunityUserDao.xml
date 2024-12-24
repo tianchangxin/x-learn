@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xin.learn.server.dao.CommunityUserDao">
+
+    <resultMap type="cn.xin.learn.server.entity.po.CommunityUser" id="CommunityUserMap">
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="pwd" column="pwd" jdbcType="VARCHAR"/>
+        <result property="userSex" column="user_sex" jdbcType="INTEGER"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="role" column="role" jdbcType="VARCHAR"/>
+        <result property="deptId" column="dept_id" jdbcType="VARCHAR"/>
+        <result property="superAdmin" column="super_admin" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+        <result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+        <result property="delete" column="delete" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="CommunityUserMap">
+        select user_id,
+               user_name,
+               pwd,
+               user_sex,
+               email,
+               role,
+               dept_id,
+               super_admin,
+               status,
+               create_time,
+               update_time,
+               create_user,
+               update_user,
+        delete
+        from community_user
+        where user_id = #{userId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="CommunityUserMap">
+        select
+        user_id, user_name, pwd, user_sex, email, role, dept_id, super_admin, status, create_time, update_time,
+        create_user, update_user, delete
+        from community_user
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name = #{userName}
+            </if>
+            <if test="pwd != null and pwd != ''">
+                and pwd = #{pwd}
+            </if>
+            <if test="userSex != null">
+                and user_sex = #{userSex}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="role != null and role != ''">
+                and role = #{role}
+            </if>
+            <if test="deptId != null and deptId != ''">
+                and dept_id = #{deptId}
+            </if>
+            <if test="superAdmin != null">
+                and super_admin = #{superAdmin}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="createUser != null and createUser != ''">
+                and create_user = #{createUser}
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                and update_user = #{updateUser}
+            </if>
+            <if test="delete != null">
+                and delete = #{delete}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from community_user
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name = #{userName}
+            </if>
+            <if test="pwd != null and pwd != ''">
+                and pwd = #{pwd}
+            </if>
+            <if test="userSex != null">
+                and user_sex = #{userSex}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="role != null and role != ''">
+                and role = #{role}
+            </if>
+            <if test="deptId != null and deptId != ''">
+                and dept_id = #{deptId}
+            </if>
+            <if test="superAdmin != null">
+                and super_admin = #{superAdmin}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="createUser != null and createUser != ''">
+                and create_user = #{createUser}
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                and update_user = #{updateUser}
+            </if>
+            <if test="delete != null">
+                and delete = #{delete}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
+        insert into community_user(user_name, pwd, user_sex, email, role, dept_id, super_admin, status, create_time,
+                                   update_time, create_user, update_user, delete)
+        values (#{userName}, #{pwd}, #{userSex}, #{email}, #{role}, #{deptId}, #{superAdmin}, #{status}, #{createTime},
+                #{updateTime}, #{createUser}, #{updateUser}, #{delete})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="userId" useGeneratedKeys="true">
+        insert into community_user(user_name, pwd, user_sex, email, role, dept_id, super_admin, status, create_time,
+        update_time, create_user, update_user, delete)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.userName}, #{entity.pwd}, #{entity.userSex}, #{entity.email}, #{entity.role}, #{entity.deptId},
+            #{entity.superAdmin}, #{entity.status}, #{entity.createTime}, #{entity.updateTime}, #{entity.createUser},
+            #{entity.updateUser}, #{entity.delete})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="userId" useGeneratedKeys="true">
+        insert into community_user(user_name, pwd, user_sex, email, role, dept_id, super_admin, status, create_time,
+        update_time, create_user, update_user, delete)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.userName}, #{entity.pwd}, #{entity.userSex}, #{entity.email}, #{entity.role}, #{entity.deptId},
+            #{entity.superAdmin}, #{entity.status}, #{entity.createTime}, #{entity.updateTime}, #{entity.createUser},
+            #{entity.updateUser}, #{entity.delete})
+        </foreach>
+        on duplicate key update
+        user_name = values(user_name),
+        pwd = values(pwd),
+        user_sex = values(user_sex),
+        email = values(email),
+        role = values(role),
+        dept_id = values(dept_id),
+        super_admin = values(super_admin),
+        status = values(status),
+        create_time = values(create_time),
+        update_time = values(update_time),
+        create_user = values(create_user),
+        update_user = values(update_user),
+        delete = values(delete)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update community_user
+        <set>
+            <if test="userName != null and userName != ''">
+                user_name = #{userName},
+            </if>
+            <if test="pwd != null and pwd != ''">
+                pwd = #{pwd},
+            </if>
+            <if test="userSex != null">
+                user_sex = #{userSex},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="role != null and role != ''">
+                role = #{role},
+            </if>
+            <if test="deptId != null and deptId != ''">
+                dept_id = #{deptId},
+            </if>
+            <if test="superAdmin != null">
+                super_admin = #{superAdmin},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="createUser != null and createUser != ''">
+                create_user = #{createUser},
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                update_user = #{updateUser},
+            </if>
+            <if test="delete != null">
+                delete = #{delete},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from community_user
+        where user_id = #{userId}
+    </delete>
+
+</mapper>
+

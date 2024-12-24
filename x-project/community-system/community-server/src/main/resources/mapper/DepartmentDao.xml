@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xin.learn.server.dao.DepartmentDao">
+
+    <resultMap type="cn.xin.learn.server.entity.po.Department" id="DepartmentMap">
+        <result property="deptId" column="dept_id" jdbcType="INTEGER"/>
+        <result property="deptName" column="dept_name" jdbcType="VARCHAR"/>
+        <result property="deptParentId" column="dept_parent_id" jdbcType="INTEGER"/>
+        <result property="deptParentName" column="dept_parent_name" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+        <result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+        <result property="delete" column="delete" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="DepartmentMap">
+        select dept_id,
+               dept_name,
+               dept_parent_id,
+               dept_parent_name,
+               create_time,
+               update_time,
+               create_user,
+               update_user,
+        delete
+        from department
+        where dept_id = #{deptId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="DepartmentMap">
+        select
+        dept_id, dept_name, dept_parent_id, dept_parent_name, create_time, update_time, create_user, update_user, delete
+        from department
+        <where>
+            <if test="deptId != null">
+                and dept_id = #{deptId}
+            </if>
+            <if test="deptName != null and deptName != ''">
+                and dept_name = #{deptName}
+            </if>
+            <if test="deptParentId != null">
+                and dept_parent_id = #{deptParentId}
+            </if>
+            <if test="deptParentName != null and deptParentName != ''">
+                and dept_parent_name = #{deptParentName}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="createUser != null and createUser != ''">
+                and create_user = #{createUser}
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                and update_user = #{updateUser}
+            </if>
+            <if test="delete != null">
+                and delete = #{delete}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from department
+        <where>
+            <if test="deptId != null">
+                and dept_id = #{deptId}
+            </if>
+            <if test="deptName != null and deptName != ''">
+                and dept_name = #{deptName}
+            </if>
+            <if test="deptParentId != null">
+                and dept_parent_id = #{deptParentId}
+            </if>
+            <if test="deptParentName != null and deptParentName != ''">
+                and dept_parent_name = #{deptParentName}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="createUser != null and createUser != ''">
+                and create_user = #{createUser}
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                and update_user = #{updateUser}
+            </if>
+            <if test="delete != null">
+                and delete = #{delete}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="deptId" useGeneratedKeys="true">
+        insert into department(dept_name, dept_parent_id, dept_parent_name, create_time, update_time, create_user,
+                               update_user, delete)
+        values (#{deptName}, #{deptParentId}, #{deptParentName}, #{createTime}, #{updateTime}, #{createUser},
+                #{updateUser}, #{delete})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="deptId" useGeneratedKeys="true">
+        insert into department(dept_name, dept_parent_id, dept_parent_name, create_time, update_time, create_user,
+        update_user, delete)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.deptName}, #{entity.deptParentId}, #{entity.deptParentName}, #{entity.createTime},
+            #{entity.updateTime}, #{entity.createUser}, #{entity.updateUser}, #{entity.delete})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="deptId" useGeneratedKeys="true">
+        insert into department(dept_name, dept_parent_id, dept_parent_name, create_time, update_time, create_user,
+        update_user, delete)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.deptName}, #{entity.deptParentId}, #{entity.deptParentName}, #{entity.createTime},
+            #{entity.updateTime}, #{entity.createUser}, #{entity.updateUser}, #{entity.delete})
+        </foreach>
+        on duplicate key update
+        dept_name = values(dept_name),
+        dept_parent_id = values(dept_parent_id),
+        dept_parent_name = values(dept_parent_name),
+        create_time = values(create_time),
+        update_time = values(update_time),
+        create_user = values(create_user),
+        update_user = values(update_user),
+        delete = values(delete)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update department
+        <set>
+            <if test="deptName != null and deptName != ''">
+                dept_name = #{deptName},
+            </if>
+            <if test="deptParentId != null">
+                dept_parent_id = #{deptParentId},
+            </if>
+            <if test="deptParentName != null and deptParentName != ''">
+                dept_parent_name = #{deptParentName},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="createUser != null and createUser != ''">
+                create_user = #{createUser},
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                update_user = #{updateUser},
+            </if>
+            <if test="delete != null">
+                delete = #{delete},
+            </if>
+        </set>
+        where dept_id = #{deptId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from department
+        where dept_id = #{deptId}
+    </delete>
+
+</mapper>
+
