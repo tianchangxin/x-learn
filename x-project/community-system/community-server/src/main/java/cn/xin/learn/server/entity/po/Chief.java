@@ -1,10 +1,9 @@
 package cn.xin.learn.server.entity.po;
 
-import java.util.Date;
-
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 政务表;(Chief)表实体类
@@ -12,7 +11,6 @@ import java.io.Serializable;
  * @author makejava
  * @since 2024-12-24 15:42:24
  */
-@SuppressWarnings("serial")
 public class Chief extends Model<Chief> {
     //政务Id
     private Integer chiefId;
