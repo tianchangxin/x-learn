@@ -1,10 +1,9 @@
 package cn.xin.learn.server.entity.po;
 
-import java.util.Date;
-
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 问题;(Problem)表实体类
@@ -192,7 +191,7 @@ public class Problem extends Model<Problem> {
      * @return 主键值
      */
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.problemId;
     }
 }

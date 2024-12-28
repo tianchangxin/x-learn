@@ -1,8 +1,9 @@
 package cn.xin.learn.server.entity.po;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import lombok.Data;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,8 +12,10 @@ import java.util.Date;
  * @author makejava
  * @since 2024-12-24 15:42:24
  */
+@Data
 public class Chief extends Model<Chief> {
     //政务Id
+    @TableId
     private Integer chiefId;
     //政务标题
     private String chiefTitle;
@@ -33,95 +36,5 @@ public class Chief extends Model<Chief> {
     //是否删除（0-未删除，1-删除）
     private Integer delete;
 
-
-    public Integer getChiefId() {
-        return chiefId;
-    }
-
-    public void setChiefId(Integer chiefId) {
-        this.chiefId = chiefId;
-    }
-
-    public String getChiefTitle() {
-        return chiefTitle;
-    }
-
-    public void setChiefTitle(String chiefTitle) {
-        this.chiefTitle = chiefTitle;
-    }
-
-    public Integer getChiefType() {
-        return chiefType;
-    }
-
-    public void setChiefType(Integer chiefType) {
-        this.chiefType = chiefType;
-    }
-
-    public String getChiefContent() {
-        return chiefContent;
-    }
-
-    public void setChiefContent(String chiefContent) {
-        this.chiefContent = chiefContent;
-    }
-
-    public String getChiefPic() {
-        return chiefPic;
-    }
-
-    public void setChiefPic(String chiefPic) {
-        this.chiefPic = chiefPic;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getCreateUser() {
-        return createUser;
-    }
-
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser;
-    }
-
-    public String getUpdateUser() {
-        return updateUser;
-    }
-
-    public void setUpdateUser(String updateUser) {
-        this.updateUser = updateUser;
-    }
-
-    public Integer getDelete() {
-        return delete;
-    }
-
-    public void setDelete(Integer delete) {
-        this.delete = delete;
-    }
-
-    /**
-     * 获取主键值
-     *
-     * @return 主键值
-     */
-    @Override
-    protected Serializable pkVal() {
-        return this.chiefId;
-    }
 }
 

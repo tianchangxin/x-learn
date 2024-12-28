@@ -1,10 +1,9 @@
 package cn.xin.learn.server.entity.po;
 
-import java.util.Date;
-
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 积分;(Integral)表实体类
@@ -132,7 +131,7 @@ public class Integral extends Model<Integral> {
      * @return 主键值
      */
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.integralId;
     }
 }
