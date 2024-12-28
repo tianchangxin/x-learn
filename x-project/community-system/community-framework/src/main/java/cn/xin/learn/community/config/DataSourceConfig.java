@@ -1,14 +1,18 @@
 package cn.xin.learn.community.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import org.apache.ibatis.logging.stdout.StdOutImpl;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 
 /**
  * @author xin
@@ -36,8 +40,10 @@ public class DataSourceConfig {
      */
     @Bean
     @Primary
-    public SqlSessionFactoryBean getSqlsessionFactroyBean(@Autowired DataSource dataSource) {
+    public SqlSessionFactoryBean getSqlsessionFactroyBean(@Autowired DataSource dataSource) throws IOException {
 
+        //mapper xml文件路径
+        //创建SqlSessionFactoryBean
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         //注入数据源
         factoryBean.setDataSource(dataSource);
@@ -45,7 +51,10 @@ public class DataSourceConfig {
 
         //创建mybatis配置项类  可以配置驼峰命名、日志实现、、、、
         org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
-//        config.setLogImpl();
+        config.setLogImpl(StdOutImpl.class);
+        Resource[] resources = new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/*.xml");
+        factoryBean.setMapperLocations(resources);
+        factoryBean.setConfiguration(config);
         return factoryBean;
     }
 

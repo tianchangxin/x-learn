@@ -1,7 +1,7 @@
 package cn.xin.learn.community.entity.po;
 
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
@@ -13,7 +13,8 @@ import java.util.Date;
  * @since 2024-12-24 15:42:24
  */
 @Data
-public class Chief extends Model<Chief> {
+@TableName(value = "chief")
+public class Chief {
     //政务Id
     @TableId
     private Integer chiefId;

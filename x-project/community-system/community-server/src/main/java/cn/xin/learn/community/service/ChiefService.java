@@ -10,6 +10,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-12-24 15:42:24
  */
 public interface ChiefService extends IService<Chief> {
-
+    Object test();
 }
 

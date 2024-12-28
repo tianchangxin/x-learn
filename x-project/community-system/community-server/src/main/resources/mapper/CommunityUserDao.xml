@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.xin.learn.server.dao.CommunityUserDao">
+<mapper namespace="cn.xin.learn.community.dao.CommunityUserDao">
 
     <resultMap type="cn.xin.learn.community.entity.po.CommunityUser" id="CommunityUserMap">
         <result property="userId" column="user_id" jdbcType="INTEGER"/>

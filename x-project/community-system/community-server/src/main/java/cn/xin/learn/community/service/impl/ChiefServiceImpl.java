@@ -6,6 +6,8 @@ import cn.xin.learn.community.service.ChiefService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * 政务表;(Chief)表服务实现类
  *
@@ -14,6 +16,11 @@ import org.springframework.stereotype.Service;
  */
 @Service("chiefService")
 public class ChiefServiceImpl extends ServiceImpl<ChiefDao, Chief> implements ChiefService {
+    @Resource
+    private ChiefDao chiefDao;
 
+    public Object test() {
+        return baseMapper.selectById(1);
+    }
 }
 

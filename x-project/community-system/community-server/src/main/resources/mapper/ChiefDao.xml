@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.xin.learn.server.dao.ChiefDao">
+<mapper namespace="cn.xin.learn.community.dao.ChiefDao">
 
     <resultMap type="cn.xin.learn.community.entity.po.Chief" id="ChiefMap">
         <result property="chiefId" column="chief_id" jdbcType="INTEGER"/>
@@ -15,8 +15,8 @@
         <result property="delete" column="delete" jdbcType="INTEGER"/>
     </resultMap>
 
-    <!--查询单个-->
-    <select id="queryById" resultMap="ChiefMap">
+    <!--查询所有-->
+    <select id="queryAll" resultMap="ChiefMap">
         select chief_id,
                chief_title,
                chief_type,
@@ -26,169 +26,9 @@
                update_time,
                create_user,
                update_user,
-        delete
+               `delete`
         from chief
-        where chief_id = #{chiefId}
     </select>
-
-    <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="ChiefMap">
-        select
-        chief_id, chief_title, chief_type, chief_content, chief_pic, create_time, update_time, create_user, update_user,
-        delete
-        from chief
-        <where>
-            <if test="chiefId != null">
-                and chief_id = #{chiefId}
-            </if>
-            <if test="chiefTitle != null and chiefTitle != ''">
-                and chief_title = #{chiefTitle}
-            </if>
-            <if test="chiefType != null">
-                and chief_type = #{chiefType}
-            </if>
-            <if test="chiefContent != null and chiefContent != ''">
-                and chief_content = #{chiefContent}
-            </if>
-            <if test="chiefPic != null and chiefPic != ''">
-                and chief_pic = #{chiefPic}
-            </if>
-            <if test="createTime != null">
-                and create_time = #{createTime}
-            </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime}
-            </if>
-            <if test="createUser != null and createUser != ''">
-                and create_user = #{createUser}
-            </if>
-            <if test="updateUser != null and updateUser != ''">
-                and update_user = #{updateUser}
-            </if>
-            <if test="delete != null">
-                and delete = #{delete}
-            </if>
-        </where>
-        limit #{pageable.offset}, #{pageable.pageSize}
-    </select>
-
-    <!--统计总行数-->
-    <select id="count" resultType="java.lang.Long">
-        select count(1)
-        from chief
-        <where>
-            <if test="chiefId != null">
-                and chief_id = #{chiefId}
-            </if>
-            <if test="chiefTitle != null and chiefTitle != ''">
-                and chief_title = #{chiefTitle}
-            </if>
-            <if test="chiefType != null">
-                and chief_type = #{chiefType}
-            </if>
-            <if test="chiefContent != null and chiefContent != ''">
-                and chief_content = #{chiefContent}
-            </if>
-            <if test="chiefPic != null and chiefPic != ''">
-                and chief_pic = #{chiefPic}
-            </if>
-            <if test="createTime != null">
-                and create_time = #{createTime}
-            </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime}
-            </if>
-            <if test="createUser != null and createUser != ''">
-                and create_user = #{createUser}
-            </if>
-            <if test="updateUser != null and updateUser != ''">
-                and update_user = #{updateUser}
-            </if>
-            <if test="delete != null">
-                and delete = #{delete}
-            </if>
-        </where>
-    </select>
-
-    <!--新增所有列-->
-    <insert id="insert" keyProperty="chiefId" useGeneratedKeys="true">
-        insert into chief(chief_title, chief_type, chief_content, chief_pic, create_time, update_time, create_user,
-                          update_user, delete)
-        values (#{chiefTitle}, #{chiefType}, #{chiefContent}, #{chiefPic}, #{createTime}, #{updateTime}, #{createUser},
-                #{updateUser}, #{delete})
-    </insert>
-
-    <insert id="insertBatch" keyProperty="chiefId" useGeneratedKeys="true">
-        insert into chief(chief_title, chief_type, chief_content, chief_pic, create_time, update_time, create_user,
-        update_user, delete)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.chiefTitle}, #{entity.chiefType}, #{entity.chiefContent}, #{entity.chiefPic},
-            #{entity.createTime}, #{entity.updateTime}, #{entity.createUser}, #{entity.updateUser}, #{entity.delete})
-        </foreach>
-    </insert>
-
-    <insert id="insertOrUpdateBatch" keyProperty="chiefId" useGeneratedKeys="true">
-        insert into chief(chief_title, chief_type, chief_content, chief_pic, create_time, update_time, create_user,
-        update_user, delete)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.chiefTitle}, #{entity.chiefType}, #{entity.chiefContent}, #{entity.chiefPic},
-            #{entity.createTime}, #{entity.updateTime}, #{entity.createUser}, #{entity.updateUser}, #{entity.delete})
-        </foreach>
-        on duplicate key update
-        chief_title = values(chief_title),
-        chief_type = values(chief_type),
-        chief_content = values(chief_content),
-        chief_pic = values(chief_pic),
-        create_time = values(create_time),
-        update_time = values(update_time),
-        create_user = values(create_user),
-        update_user = values(update_user),
-        delete = values(delete)
-    </insert>
-
-    <!--通过主键修改数据-->
-    <update id="update">
-        update chief
-        <set>
-            <if test="chiefTitle != null and chiefTitle != ''">
-                chief_title = #{chiefTitle},
-            </if>
-            <if test="chiefType != null">
-                chief_type = #{chiefType},
-            </if>
-            <if test="chiefContent != null and chiefContent != ''">
-                chief_content = #{chiefContent},
-            </if>
-            <if test="chiefPic != null and chiefPic != ''">
-                chief_pic = #{chiefPic},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime},
-            </if>
-            <if test="createUser != null and createUser != ''">
-                create_user = #{createUser},
-            </if>
-            <if test="updateUser != null and updateUser != ''">
-                update_user = #{updateUser},
-            </if>
-            <if test="delete != null">
-                delete = #{delete},
-            </if>
-        </set>
-        where chief_id = #{chiefId}
-    </update>
-
-    <!--通过主键删除-->
-    <delete id="deleteById">
-        delete
-        from chief
-        where chief_id = #{chiefId}
-    </delete>
 
 </mapper>
 

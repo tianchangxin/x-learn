@@ -1,6 +1,7 @@
 package cn.xin.learn.community;
 
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -11,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @Slf4j
-//@MapperScan(basePackages = "cn.xin.learn.community.dao")
+@MapperScan(basePackages = "cn.xin.learn.community.dao")
 //@EnableAspectJAutoProxy(exposeProxy = true)
 public class CommunityServerApp {
     public static void main(String[] args) {
