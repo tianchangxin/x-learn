@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.xin.learn.server.dao.CommentTemplateDao">
 
-    <resultMap type="cn.xin.learn.server.entity.po.CommentTemplate" id="CommentTemplateMap">
+    <resultMap type="cn.xin.learn.community.entity.po.CommentTemplate" id="CommentTemplateMap">
         <result property="templateId" column="template_id" jdbcType="INTEGER"/>
         <result property="templateName" column="template_name" jdbcType="VARCHAR"/>
         <result property="templateContent" column="template_content" jdbcType="VARCHAR"/>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.xin.learn.server.dao.DepartmentDao">
 
-    <resultMap type="cn.xin.learn.server.entity.po.Department" id="DepartmentMap">
+    <resultMap type="cn.xin.learn.community.entity.po.Department" id="DepartmentMap">
         <result property="deptId" column="dept_id" jdbcType="INTEGER"/>
         <result property="deptName" column="dept_name" jdbcType="VARCHAR"/>
         <result property="deptParentId" column="dept_parent_id" jdbcType="INTEGER"/>

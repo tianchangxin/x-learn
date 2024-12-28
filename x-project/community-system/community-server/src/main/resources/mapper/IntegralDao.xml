@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.xin.learn.server.dao.IntegralDao">
 
-    <resultMap type="cn.xin.learn.server.entity.po.Integral" id="IntegralMap">
+    <resultMap type="cn.xin.learn.community.entity.po.Integral" id="IntegralMap">
         <result property="integralId" column="integral_id" jdbcType="INTEGER"/>
         <result property="integralOrigin" column="integral_origin" jdbcType="VARCHAR"/>
         <result property="integralNum" column="integral_num" jdbcType="NUMERIC"/>

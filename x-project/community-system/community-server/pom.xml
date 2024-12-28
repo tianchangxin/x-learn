@@ -64,11 +64,6 @@
             <artifactId>mybatis-plus</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-
 
     </dependencies>
     <dependencyManagement>
@@ -100,7 +95,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>cn.xin.learn.server.CommunityServerApp</mainClass>
+                    <mainClass>cn.xin.learn.community.CommunityServerApp</mainClass>
                     <skip>true</skip>
                 </configuration>
                 <executions>

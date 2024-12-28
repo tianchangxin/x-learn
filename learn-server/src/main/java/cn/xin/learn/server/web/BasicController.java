@@ -16,7 +16,7 @@
 
 package cn.xin.learn.server.web;
 
-import cn.xin.learn.server.service.UserService;
+import cn.xin.learn.community.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

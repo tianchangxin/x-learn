@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.xin.learn.server.dao.ChiefDao">
 
-    <resultMap type="cn.xin.learn.server.entity.po.Chief" id="ChiefMap">
+    <resultMap type="cn.xin.learn.community.entity.po.Chief" id="ChiefMap">
         <result property="chiefId" column="chief_id" jdbcType="INTEGER"/>
         <result property="chiefTitle" column="chief_title" jdbcType="VARCHAR"/>
         <result property="chiefType" column="chief_type" jdbcType="INTEGER"/>
