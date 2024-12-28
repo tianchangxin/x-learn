@@ -1,18 +1,23 @@
 package cn.xin.learn.community.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.baomidou.mybatisplus.core.MybatisConfiguration;
+import com.baomidou.mybatisplus.core.config.GlobalConfig;
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.logging.stdout.StdOutImpl;
-import org.mybatis.spring.SqlSessionFactoryBean;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.io.IOException;
 
 /**
  * @author xin
@@ -21,7 +26,13 @@ import java.io.IOException;
  */
 @Configuration
 @MapperScan(basePackages = "cn.xin.learn.community.dao", sqlSessionFactoryRef = "getSqlsessionFactroyBean")
+@RequiredArgsConstructor
 public class DataSourceConfig {
+    @Resource
+    private MybatisPlusInterceptor mybatisPlusInterceptor;
+
+    @Resource
+    private MetaObjectHandler communityMetaObjectHandler;
 
     @Bean("myDataSource")
     public DataSource dataSource() {
@@ -40,22 +51,26 @@ public class DataSourceConfig {
      */
     @Bean
     @Primary
-    public SqlSessionFactoryBean getSqlsessionFactroyBean(@Autowired DataSource dataSource) throws IOException {
+    public SqlSessionFactory getSqlsessionFactroyBean(@Autowired DataSource dataSource) throws Exception {
 
         //mapper xml文件路径
         //创建SqlSessionFactoryBean
-        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+        MybatisSqlSessionFactoryBean factoryBean = new MybatisSqlSessionFactoryBean();
         //注入数据源
         factoryBean.setDataSource(dataSource);
-        //注入mybatis核心配置文件路径
-
         //创建mybatis配置项类  可以配置驼峰命名、日志实现、、、、
-        org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
+        MybatisConfiguration config = new MybatisConfiguration();
         config.setLogImpl(StdOutImpl.class);
-        Resource[] resources = new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/*.xml");
-        factoryBean.setMapperLocations(resources);
+        //插件
+        config.addInterceptor(mybatisPlusInterceptor);
+        factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/*.xml"));
         factoryBean.setConfiguration(config);
-        return factoryBean;
+        GlobalConfig globalConfig = new GlobalConfig();
+        globalConfig.setBanner(false);
+        globalConfig.setMetaObjectHandler(communityMetaObjectHandler);
+        factoryBean.setGlobalConfig(globalConfig);
+        return factoryBean.getObject();
     }
+
 
 }

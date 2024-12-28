@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * 政务表;(Chief)表实体类
  *
@@ -14,7 +12,7 @@ import java.util.Date;
  */
 @Data
 @TableName(value = "chief")
-public class Chief {
+public class Chief extends BasePo {
     //政务Id
     @TableId
     private Integer chiefId;
@@ -26,16 +24,7 @@ public class Chief {
     private String chiefContent;
     //政务标题图片
     private String chiefPic;
-    //创建时间
-    private Date createTime;
-    //修改时间
-    private Date updateTime;
-    //创建用户
-    private String createUser;
-    //修改用户
-    private String updateUser;
-    //是否删除（0-未删除，1-删除）
-    private Integer delete;
+
 
 }
 

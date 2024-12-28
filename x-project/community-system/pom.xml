@@ -30,6 +30,8 @@
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <mysql-connector.version>8.0.33</mysql-connector.version>
         <druid.version>1.1.8</druid.version>
+        <commons-collections4>4.4</commons-collections4>
+        <commons-lang3>3.17.0</commons-lang3>
     </properties>
 
     <dependencyManagement>
@@ -82,10 +84,16 @@
                 <version>${disruptor.version}</version>
             </dependency>
 
-
+            <!-- 自己的模块 -->
             <dependency>
                 <groupId>cn.xin.learn</groupId>
                 <artifactId>community-framework</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.xin.learn</groupId>
+                <artifactId>community-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -119,6 +127,18 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
                 <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3}</version>
             </dependency>
 
         </dependencies>
