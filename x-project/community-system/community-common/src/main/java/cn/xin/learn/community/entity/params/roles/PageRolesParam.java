@@ -1,5 +1,6 @@
 package cn.xin.learn.community.entity.params.roles;
 
+import cn.xin.learn.community.entity.params.PageParam;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,11 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PageRolesParam {
-    //当前页
-    private Integer currentPage;
-    //每页显示条数
-    private Integer pageSize;
+public class PageRolesParam extends PageParam {
 
     //角色ID
     private Integer roleId;

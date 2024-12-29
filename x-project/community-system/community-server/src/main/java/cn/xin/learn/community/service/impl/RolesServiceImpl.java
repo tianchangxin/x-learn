@@ -38,6 +38,7 @@ public class RolesServiceImpl extends ServiceImpl<RolesDao, Roles> implements Ro
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean saveOrUpdateRoles(SaveUpdateRoleParam param) {
+        //todo 校验当前用户是否有权限
         Roles roles = new Roles();
         BeanUtils.copyProperties(param, roles);
         return this.saveOrUpdate(roles);

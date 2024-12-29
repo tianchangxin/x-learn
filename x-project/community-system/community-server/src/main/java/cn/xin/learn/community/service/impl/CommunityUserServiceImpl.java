@@ -104,7 +104,6 @@ public class CommunityUserServiceImpl extends ServiceImpl<CommunityUserDao, Comm
     @Transactional(rollbackFor = Exception.class)
     public Boolean deleteUser(List<Long> userIds) {
         CommunityAssert.notEmpty(userIds, "用户ID集合不能为空");
-        this.removeByIds(userIds);
         return this.removeByIds(userIds);
     }
 }
