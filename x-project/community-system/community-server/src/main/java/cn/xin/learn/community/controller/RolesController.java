@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 /**
  * 角色;(Roles)表控制层
@@ -39,6 +41,14 @@ public class RolesController {
     @PostMapping("listRoles")
     public PageVo<RolesDto> listRoles(@RequestBody PageRolesParam pageRolesParam) {
         return rolesService.queryRolesList(pageRolesParam);
+    }
+
+    /**
+     * 删除角色
+     */
+    @PostMapping("deleteRoles")
+    public Boolean deleteRoles(@RequestBody List<Long> roleIds) {
+        return rolesService.deleteRoles(roleIds);
     }
 
 }

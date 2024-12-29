@@ -15,7 +15,7 @@ import lombok.Data;
 public class Roles extends BasePo {
     //角色ID
     @TableId(type = IdType.AUTO)
-    private Integer roleId;
+    private Long roleId;
     //角色名称
     private String roleName;
     //角色状态（0-禁用，1-启用）

@@ -7,6 +7,7 @@ import cn.xin.learn.community.entity.params.roles.PageRolesParam;
 import cn.xin.learn.community.entity.params.roles.SaveUpdateRoleParam;
 import cn.xin.learn.community.entity.po.Roles;
 import cn.xin.learn.community.entity.vo.PageVo;
+import cn.xin.learn.community.exceptions.asserts.CommunityAssert;
 import cn.xin.learn.community.service.RolesService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -16,6 +17,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -62,6 +64,20 @@ public class RolesServiceImpl extends ServiceImpl<RolesDao, Roles> implements Ro
                 .totalElement(pageRes.getTotal())
                 .totalPage(pageRes.getPages())
                 .build();
+    }
+
+    /**
+     * 删除角色
+     *
+     * @param roleIds 角色ID集合
+     * @return 是否删除成功
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean deleteRoles(List<Long> roleIds) {
+        //校验
+        CommunityAssert.notEmpty(roleIds, "角色ID不能为空");
+        return this.removeByIds(roleIds);
     }
 }
 

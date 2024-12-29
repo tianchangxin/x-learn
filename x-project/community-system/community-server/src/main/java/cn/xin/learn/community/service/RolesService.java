@@ -7,6 +7,8 @@ import cn.xin.learn.community.entity.po.Roles;
 import cn.xin.learn.community.entity.vo.PageVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * 角色;(Roles)表服务接口
  *
@@ -29,5 +31,13 @@ public interface RolesService extends IService<Roles> {
      * @return 角色列表
      */
     PageVo<RolesDto> queryRolesList(PageRolesParam pageRolesParam);
+
+    /**
+     * 删除角色
+     *
+     * @param roleIds 角色ID集合
+     * @return 是否删除成功
+     */
+    Boolean deleteRoles(List<Long> roleIds);
 }
 
