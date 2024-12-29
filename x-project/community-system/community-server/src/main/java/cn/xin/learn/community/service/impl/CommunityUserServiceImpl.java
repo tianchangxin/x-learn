@@ -12,6 +12,7 @@ import cn.xin.learn.community.service.CommunityUserService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,20 +45,27 @@ public class CommunityUserServiceImpl extends ServiceImpl<CommunityUserDao, Comm
     /**
      * 查询用户列表
      *
-     * @param pageUserParam 分页参数
+     * @param param 分页参数
      * @return 用户列表
      */
     @Override
-    public PageVo<CommunityUser> queryUserList(PageUserParam pageUserParam) {
+    public PageVo<CommunityUser> queryUserList(PageUserParam param) {
         //分页查询
-        Page<CommunityUser> page = new Page<>();
-        page.setCurrent(pageUserParam.getCurrentPage());
-        page.setSize(pageUserParam.getPageSize());
-        Page<CommunityUser> userPage = this.page(page);
+        LambdaQueryWrapper<CommunityUser> wrapper = new LambdaQueryWrapper<CommunityUser>()
+                .eq(Objects.nonNull(param.getUserId()), CommunityUser::getUserId, param.getUserId())
+                .like(StringUtils.isNotEmpty(param.getUserName()), CommunityUser::getUserName, param.getUserName())
+                .eq(Objects.nonNull(param.getUserSex()), CommunityUser::getUserSex, param.getUserSex())
+                .eq(StringUtils.isNotEmpty(param.getEmail()), CommunityUser::getEmail, param.getEmail())
+                .eq(Objects.nonNull(param.getRole()), CommunityUser::getRole, param.getRole())
+                .eq(Objects.nonNull(param.getDeptId()), CommunityUser::getDeptId, param.getDeptId())
+                .eq(Objects.nonNull(param.getSuperAdmin()), CommunityUser::getSuperAdmin, param.getSuperAdmin())
+                .eq(Objects.nonNull(param.getStatus()), CommunityUser::getStatus, param.getStatus());
+        Page<CommunityUser> page = Page.of(param.getCurrentPage(), param.getPageSize());
+        page = this.page(page, wrapper);
         return PageVo.<CommunityUser>builder()
-                .items(userPage.getRecords())
-                .totalElement(userPage.getTotal())
-                .totalPage(userPage.getPages())
+                .items(page.getRecords())
+                .totalElement(page.getTotal())
+                .totalPage(page.getPages())
                 .build();
     }
 
