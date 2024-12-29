@@ -106,7 +106,7 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>cn.xin.learn.community.CommunityServerApp</mainClass>
-                    <skip>true</skip>
+                    <!--                    <skip>true</skip>-->
                 </configuration>
                 <executions>
                     <execution>

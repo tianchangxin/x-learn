@@ -63,12 +63,12 @@ public class WebInterceptor implements HandlerInterceptor {
      */
     private boolean dealUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //获取header
-        String UserId = request.getHeader("user-id");
-        if (StringUtils.isEmpty(UserId)) {
+        String userId = request.getHeader("user-id");
+        if (StringUtils.isEmpty(userId)) {
             CommunityAssert.failPermission("用户未登录");
             return true;
         }
-        CommunityUser communityUser = communityUserService.getBaseMapper().selectById(NumberUtils.toLong(UserId));
+        CommunityUser communityUser = communityUserService.getBaseMapper().selectById(NumberUtils.toLong(userId));
         if (Objects.isNull(communityUser)) {
             CommunityAssert.failPermission("用户不存在");
             return true;
