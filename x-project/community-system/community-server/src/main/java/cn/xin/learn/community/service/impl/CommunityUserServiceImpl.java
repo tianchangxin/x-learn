@@ -7,7 +7,9 @@ import cn.xin.learn.community.entity.params.user.SaveUpdateUserParam;
 import cn.xin.learn.community.entity.po.CommunityUser;
 import cn.xin.learn.community.entity.vo.PageVo;
 import cn.xin.learn.community.exceptions.asserts.CommunityAssert;
+import cn.xin.learn.community.helpers.UserHelper;
 import cn.xin.learn.community.service.CommunityUserService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
@@ -52,9 +54,8 @@ public class CommunityUserServiceImpl extends ServiceImpl<CommunityUserDao, Comm
         page.setCurrent(pageUserParam.getCurrentPage());
         page.setSize(pageUserParam.getPageSize());
         Page<CommunityUser> userPage = this.page(page);
-        List<CommunityUser> records = userPage.getRecords();
         return PageVo.<CommunityUser>builder()
-                .items(records)
+                .items(userPage.getRecords())
                 .totalElement(userPage.getTotal())
                 .totalPage(userPage.getPages())
                 .build();
@@ -71,14 +72,32 @@ public class CommunityUserServiceImpl extends ServiceImpl<CommunityUserDao, Comm
         CommunityUser communityUser = new CommunityUser();
         //校验参数
         UserCheck.checkRegisterUserParam(param);
-        //复制属性
-        BeanUtils.copyProperties(param, communityUser);
         //如果存在，则抛异常
-        if (Objects.nonNull(this.getById(communityUser.getUserId()))) {
+        LambdaQueryWrapper<CommunityUser> wrapper = new LambdaQueryWrapper<CommunityUser>()
+                .eq(CommunityUser::getUserName, param.getUserName());
+        if (Objects.nonNull(this.getOne(wrapper))) {
             CommunityAssert.fail("用户已存在");
         }
+        //复制属性
+        BeanUtils.copyProperties(param, communityUser);
+        //设置到当前用户中
+        UserHelper.setCurrentUser(communityUser);
         //保存用户
-        return this.save(communityUser);
+        return save(communityUser);
+    }
+
+    /**
+     * 删除用户
+     *
+     * @param userIds 用户ID集合
+     * @return 是否删除成功
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean deleteUser(List<Long> userIds) {
+        CommunityAssert.notEmpty(userIds, "用户ID集合不能为空");
+        this.removeByIds(userIds);
+        return this.removeByIds(userIds);
     }
 }
 

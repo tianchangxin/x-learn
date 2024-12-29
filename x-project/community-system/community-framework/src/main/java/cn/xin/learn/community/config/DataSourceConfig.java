@@ -68,6 +68,10 @@ public class DataSourceConfig {
         GlobalConfig globalConfig = new GlobalConfig();
         globalConfig.setBanner(false);
         globalConfig.setMetaObjectHandler(communityMetaObjectHandler);
+        //逻辑删除
+        globalConfig.setDbConfig(new GlobalConfig.DbConfig()
+                .setLogicDeleteValue("1")
+                .setLogicNotDeleteValue("0"));
         factoryBean.setGlobalConfig(globalConfig);
         return factoryBean.getObject();
     }

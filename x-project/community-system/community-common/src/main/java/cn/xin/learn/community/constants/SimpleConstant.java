@@ -21,4 +21,9 @@ public interface SimpleConstant {
      * 空格
      */
     String SPACE = " ";
+
+    /**
+     * 系统
+     */
+    String SYSTEM = "system";
 }

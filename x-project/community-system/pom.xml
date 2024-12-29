@@ -32,6 +32,7 @@
         <druid.version>1.1.8</druid.version>
         <commons-collections4>4.4</commons-collections4>
         <commons-lang3>3.17.0</commons-lang3>
+        <hutool.version>5.8.29</hutool.version>
     </properties>
 
     <dependencyManagement>
@@ -139,6 +140,12 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
 
         </dependencies>

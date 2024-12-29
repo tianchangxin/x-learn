@@ -6,6 +6,8 @@ import cn.xin.learn.community.entity.po.CommunityUser;
 import cn.xin.learn.community.entity.vo.PageVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * 社区用户表;(CommunityUser)表服务接口
  *
@@ -36,5 +38,13 @@ public interface CommunityUserService extends IService<CommunityUser> {
      * @return 是否注册成功
      */
     Boolean registerUser(SaveUpdateUserParam param);
+
+    /**
+     * 删除用户
+     *
+     * @param userIds 用户ID集合
+     * @return 是否删除成功
+     */
+    Boolean deleteUser(List<Long> userIds);
 }
 

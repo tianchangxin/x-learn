@@ -1,6 +1,7 @@
 package cn.xin.learn.community.config;
 
 import cn.xin.learn.community.entity.po.CommunityUser;
+import cn.xin.learn.community.exceptions.asserts.CommunityAssert;
 import cn.xin.learn.community.helpers.UserHelper;
 import cn.xin.learn.community.service.CommunityUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -27,6 +29,9 @@ public class WebInterceptor implements HandlerInterceptor {
     @Resource
     private CommunityUserService communityUserService;
 
+    //排除路径
+    private static final List<String> EXCLUDE_PATHS = List.of("/communityUser/registerUser", "/communityUser/loginUser");
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws IOException {
@@ -36,6 +41,10 @@ public class WebInterceptor implements HandlerInterceptor {
             return true;
         }
         String servletPath = request.getServletPath();
+        //排除路径
+        if (EXCLUDE_PATHS.contains(servletPath)) {
+            return true;
+        }
         if (dealUser(request, response)) {
             return false;
         }
@@ -56,14 +65,12 @@ public class WebInterceptor implements HandlerInterceptor {
         //获取header
         String UserId = request.getHeader("user-id");
         if (StringUtils.isEmpty(UserId)) {
-            log.error("用户未登录");
-            response.sendError(401, "用户未登录");
+            CommunityAssert.failPermission("用户未登录");
             return true;
         }
         CommunityUser communityUser = communityUserService.getBaseMapper().selectById(NumberUtils.toLong(UserId));
         if (Objects.isNull(communityUser)) {
-            log.error("用户不存在");
-            response.sendError(401, "用户不存在");
+            CommunityAssert.failPermission("用户不存在");
             return true;
         }
         //设置当前用户
@@ -78,5 +85,6 @@ public class WebInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+        UserHelper.removeCurrentUser();
     }
 }

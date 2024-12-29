@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 /**
  * 社区用户表;(CommunityUser)表控制层
@@ -48,6 +50,14 @@ public class CommunityUserController {
     @PostMapping("listUser")
     public PageVo<CommunityUser> listUser(@RequestBody PageUserParam pageUserParam) {
         return communityUserService.queryUserList(pageUserParam);
+    }
+
+    /**
+     * 删除用户
+     */
+    @PostMapping("deleteUser")
+    public Boolean deleteUser(@RequestBody List<Long> userIds) {
+        return communityUserService.deleteUser(userIds);
     }
 }
 

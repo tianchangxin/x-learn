@@ -1,5 +1,6 @@
 package cn.xin.learn.community.helpers;
 
+import cn.xin.learn.community.constants.SimpleConstant;
 import cn.xin.learn.community.entity.po.CommunityUser;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +48,10 @@ public class UserHelper {
         CommunityUser user = getCurrentUser();
         if (Objects.isNull(user)) {
             return EMPTY;
+        }
+        if (Objects.isNull(user.getUserId())) {
+            //系统
+            return SimpleConstant.SYSTEM;
         }
         return user.getUserId() + MIDDLE_LINE + user.getUserName();
     }

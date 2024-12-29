@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 public class CommunityUser extends BasePo {
     //用户ID
     @TableId(type = IdType.AUTO)
-    private Integer userId;
+    private Long userId;
     //用户名
     private String userName;
     //密码

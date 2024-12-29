@@ -1,6 +1,7 @@
 package cn.xin.learn.community.exceptions.asserts;
 
 import cn.xin.learn.community.exceptions.CommunityException;
+import cn.xin.learn.community.exceptions.CommunityPermissionException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
@@ -41,6 +42,20 @@ public class CommunityAssert extends Assert {
      */
     public static void fail(String message) {
         throw new CommunityException(message);
+    }
+
+    /**
+     * 失败-指定异常
+     */
+    public static void fail(String message, Throwable e) {
+        throw new CommunityException(message, e);
+    }
+
+    /**
+     * 失败-权限异常
+     */
+    public static void failPermission(String message) {
+        throw new CommunityPermissionException(message);
     }
 
 }
