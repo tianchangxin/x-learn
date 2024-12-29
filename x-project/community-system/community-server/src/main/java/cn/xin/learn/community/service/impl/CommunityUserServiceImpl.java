@@ -1,10 +1,12 @@
 package cn.xin.learn.community.service.impl;
 
+import cn.xin.learn.community.checks.user.UserCheck;
 import cn.xin.learn.community.dao.CommunityUserDao;
 import cn.xin.learn.community.entity.params.user.PageUserParam;
 import cn.xin.learn.community.entity.params.user.SaveUpdateUserParam;
 import cn.xin.learn.community.entity.po.CommunityUser;
 import cn.xin.learn.community.entity.vo.PageVo;
+import cn.xin.learn.community.exceptions.asserts.CommunityAssert;
 import cn.xin.learn.community.service.CommunityUserService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 社区用户表;(CommunityUser)表服务实现类
@@ -66,11 +69,15 @@ public class CommunityUserServiceImpl extends ServiceImpl<CommunityUserDao, Comm
     @Override
     public Boolean registerUser(SaveUpdateUserParam param) {
         CommunityUser communityUser = new CommunityUser();
+        //校验参数
+        UserCheck.checkRegisterUserParam(param);
+        //复制属性
         BeanUtils.copyProperties(param, communityUser);
         //如果存在，则抛异常
-        if (this.getById(communityUser.getUserId()) != null) {
-            throw new RuntimeException("用户已存在");
+        if (Objects.nonNull(this.getById(communityUser.getUserId()))) {
+            CommunityAssert.fail("用户已存在");
         }
+        //保存用户
         return this.save(communityUser);
     }
 }
