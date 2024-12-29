@@ -6,8 +6,19 @@ package cn.xin.learn.community.constants;
  * @date 2024年12月28日
  */
 public interface SimpleConstant {
+
+    /**
+     * 空字符串
+     */
+    String EMPTY = "";
+
     /**
      * 中横线
      */
     String MIDDLE_LINE = "-";
+
+    /**
+     * 空格
+     */
+    String SPACE = " ";
 }

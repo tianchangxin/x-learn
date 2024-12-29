@@ -1,23 +1,21 @@
-package cn.xin.learn.community.entity.po;
+package cn.xin.learn.community.entity.params.user;
 
-
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * 社区用户表;(CommunityUser)表实体类
- *
- * @author makejava
- * @since 2024-12-24 15:42:22
+ * @author xin
+ * @description: 保存或者更新用户参数
+ * @date 2024年12月29日
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
-@SuppressWarnings("serial")
-public class CommunityUser extends BasePo {
-    //用户ID
-    @TableId(type = IdType.AUTO)
+@NoArgsConstructor
+@AllArgsConstructor
+@Slf4j
+public class SaveUpdateUserParam {
+    //用户ID（新增时不传，修改时传）
     private Integer userId;
     //用户名
     private String userName;
@@ -35,6 +33,4 @@ public class CommunityUser extends BasePo {
     private Integer superAdmin;
     //用户状态（0-禁用，1-启用）
     private Integer status;
-
 }
-

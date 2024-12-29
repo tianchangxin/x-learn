@@ -3,10 +3,10 @@ package cn.xin.learn.community.helpers;
 import cn.xin.learn.community.entity.po.CommunityUser;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.util.Strings;
 
 import java.util.Objects;
 
+import static cn.xin.learn.community.constants.SimpleConstant.EMPTY;
 import static cn.xin.learn.community.constants.SimpleConstant.MIDDLE_LINE;
 
 /**
@@ -46,7 +46,7 @@ public class UserHelper {
     public static String getUserIdAndName() {
         CommunityUser user = getCurrentUser();
         if (Objects.isNull(user)) {
-            return Strings.EMPTY;
+            return EMPTY;
         }
         return user.getUserId() + MIDDLE_LINE + user.getUserName();
     }

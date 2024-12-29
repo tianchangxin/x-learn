@@ -1,12 +1,14 @@
 package cn.xin.learn.community.service.impl;
 
 import cn.xin.learn.community.dao.CommunityUserDao;
-import cn.xin.learn.community.entity.params.PageUserParams;
+import cn.xin.learn.community.entity.params.user.PageUserParam;
+import cn.xin.learn.community.entity.params.user.SaveUpdateUserParam;
 import cn.xin.learn.community.entity.po.CommunityUser;
 import cn.xin.learn.community.entity.vo.PageVo;
 import cn.xin.learn.community.service.CommunityUserService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,26 +26,28 @@ public class CommunityUserServiceImpl extends ServiceImpl<CommunityUserDao, Comm
     /**
      * 新增或者修改用户
      *
-     * @param communityUser
+     * @param param 用户信息
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean saveOrUpdateUser(CommunityUser communityUser) {
+    public Boolean saveOrUpdateUser(SaveUpdateUserParam param) {
+        CommunityUser communityUser = new CommunityUser();
+        BeanUtils.copyProperties(param, communityUser);
         return this.saveOrUpdate(communityUser);
     }
 
     /**
      * 查询用户列表
      *
-     * @param pageUserParams 分页参数
+     * @param pageUserParam 分页参数
      * @return 用户列表
      */
     @Override
-    public PageVo<CommunityUser> queryUserList(PageUserParams pageUserParams) {
+    public PageVo<CommunityUser> queryUserList(PageUserParam pageUserParam) {
         //分页查询
         Page<CommunityUser> page = new Page<>();
-        page.setCurrent(pageUserParams.getCurrentPage());
-        page.setSize(pageUserParams.getPageSize());
+        page.setCurrent(pageUserParam.getCurrentPage());
+        page.setSize(pageUserParam.getPageSize());
         Page<CommunityUser> userPage = this.page(page);
         List<CommunityUser> records = userPage.getRecords();
         return PageVo.<CommunityUser>builder()
@@ -51,6 +55,23 @@ public class CommunityUserServiceImpl extends ServiceImpl<CommunityUserDao, Comm
                 .totalElement(userPage.getTotal())
                 .totalPage(userPage.getPages())
                 .build();
+    }
+
+    /**
+     * 注册用户
+     *
+     * @param param 用户信息
+     * @return 是否注册成功
+     */
+    @Override
+    public Boolean registerUser(SaveUpdateUserParam param) {
+        CommunityUser communityUser = new CommunityUser();
+        BeanUtils.copyProperties(param, communityUser);
+        //如果存在，则抛异常
+        if (this.getById(communityUser.getUserId()) != null) {
+            throw new RuntimeException("用户已存在");
+        }
+        return this.save(communityUser);
     }
 }
 

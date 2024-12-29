@@ -1,28 +1,27 @@
-package cn.xin.learn.community.entity.po;
+package cn.xin.learn.community.entity.params.user;
 
-
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
- * 社区用户表;(CommunityUser)表实体类
- *
- * @author makejava
- * @since 2024-12-24 15:42:22
+ * @author xin
+ * @description: 分页查询用户参数
+ * @date 2024年12月28日
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
-@SuppressWarnings("serial")
-public class CommunityUser extends BasePo {
+@AllArgsConstructor
+@NoArgsConstructor
+public class PageUserParam {
+    //当前页
+    private Integer currentPage;
+    //每页显示条数
+    private Integer pageSize;
+
     //用户ID
-    @TableId(type = IdType.AUTO)
     private Integer userId;
     //用户名
     private String userName;
-    //密码
-    private String pwd;
     //性别（0-保密，1-男，2-女）
     private Integer userSex;
     //邮箱
@@ -36,5 +35,5 @@ public class CommunityUser extends BasePo {
     //用户状态（0-禁用，1-启用）
     private Integer status;
 
-}
 
+}
