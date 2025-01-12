@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class PageParam {
     //当前页
-    private Integer currentPage;
+    private Integer currentPage = 0;
     //每页显示条数
-    private Integer pageSize;
+    private Integer pageSize = 10;
 }

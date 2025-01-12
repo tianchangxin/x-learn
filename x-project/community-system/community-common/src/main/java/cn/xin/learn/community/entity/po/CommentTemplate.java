@@ -1,8 +1,10 @@
 package cn.xin.learn.community.entity.po;
 
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 评价模板;(CommentTemplate)表实体类
@@ -10,12 +12,13 @@ import lombok.Data;
  * @author makejava
  * @since 2024-12-24 15:42:23
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @SuppressWarnings("serial")
 public class CommentTemplate extends BasePo {
     //评论指标模板id
-    @TableId
-    private Integer templateId;
+    @TableId(type = IdType.AUTO)
+    private Long templateId;
     //评论指标模板名称
     private String templateName;
     //模板内容

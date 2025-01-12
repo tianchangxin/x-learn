@@ -5,6 +5,7 @@ import cn.xin.learn.community.exceptions.CommunityPermissionException;
 import cn.xin.learn.community.web.entity.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,6 +51,31 @@ public class GlobalExceptionHandler {
         return Response.builder()
                 .code(CommunityPermissionException.CODE)
                 .title("社区系统权限异常，请联系管理员")
+                .message(e.getMessage())
+                .data(e.getLocalizedMessage())
+                .url(request.getRequestURI())
+                .build();
+    }
+
+    /**
+     * 大型通用异常
+     */
+    @ExceptionHandler(value = Exception.class)
+    @ResponseBody
+    public Response handleException(Exception e, HttpServletRequest request) {
+        log.error("异常：{}", e.getMessage());
+        if (e instanceof MissingServletRequestParameterException) {
+            return Response.builder()
+                    .code(HttpStatus.BAD_REQUEST.value())
+                    .title("参数异常")
+                    .message(e.getMessage())
+                    .data(e.getLocalizedMessage())
+                    .url(request.getRequestURI())
+                    .build();
+        }
+        return Response.builder()
+                .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .title("系统异常，请联系管理员")
                 .message(e.getMessage())
                 .data(e.getLocalizedMessage())
                 .url(request.getRequestURI())
