@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
+import java.util.Objects;
+
 
 /**
  * @author xin
@@ -33,6 +35,17 @@ public class CommunityAssert extends Assert {
      */
     public static void notEmpty(String str, String message) {
         if (StringUtils.isEmpty(str)) {
+            throw new CommunityException(message);
+        }
+    }
+
+    /**
+     * 对象不能为空
+     *
+     * @param obj 对象：如果为空，则抛出异常
+     */
+    public static void notNull(Object obj, String message) {
+        if (Objects.isNull(obj)) {
             throw new CommunityException(message);
         }
     }
