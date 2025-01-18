@@ -1,7 +1,10 @@
 package cn.xin.learn.community.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.xin.learn.community.checks.user.UserCheck;
 import cn.xin.learn.community.dao.CommunityUserDao;
+import cn.xin.learn.community.entity.dto.user.CommunityUserDto;
+import cn.xin.learn.community.entity.params.user.LoginUserParam;
 import cn.xin.learn.community.entity.params.user.PageUserParam;
 import cn.xin.learn.community.entity.params.user.SaveUpdateUserParam;
 import cn.xin.learn.community.entity.po.CommunityUser;
@@ -105,6 +108,31 @@ public class CommunityUserServiceImpl extends ServiceImpl<CommunityUserDao, Comm
     public Boolean deleteUser(List<Long> userIds) {
         CommunityAssert.notEmpty(userIds, "用户ID集合不能为空");
         return this.removeByIds(userIds);
+    }
+
+    /**
+     * 登录
+     *
+     * @param param 登录参数
+     * @return 是否登录成功
+     */
+    @Override
+    public CommunityUserDto login(LoginUserParam param) {
+        //校验参数
+        UserCheck.checkLoginUserParam(param);
+        CommunityUser user = BeanUtil.copyProperties(param, CommunityUser.class);
+        LambdaQueryWrapper<CommunityUser> wrapper = new LambdaQueryWrapper<CommunityUser>()
+                .and(w -> {
+                    w.eq(StringUtils.isNotEmpty(param.getUserName()), CommunityUser::getUserName, user.getUserName());
+                    w.or();
+                    w.eq(StringUtils.isNotEmpty(param.getEmail()), CommunityUser::getEmail, user.getUserName());
+                })
+                .eq(CommunityUser::getPwd, user.getPwd());
+        CommunityUser communityUser = this.getOne(wrapper);
+        if (Objects.isNull(communityUser)) {
+            CommunityAssert.fail("用户名或密码错误");
+        }
+        return BeanUtil.copyProperties(communityUser, CommunityUserDto.class);
     }
 }
 

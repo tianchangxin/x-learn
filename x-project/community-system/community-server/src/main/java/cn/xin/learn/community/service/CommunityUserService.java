@@ -1,5 +1,7 @@
 package cn.xin.learn.community.service;
 
+import cn.xin.learn.community.entity.dto.user.CommunityUserDto;
+import cn.xin.learn.community.entity.params.user.LoginUserParam;
 import cn.xin.learn.community.entity.params.user.PageUserParam;
 import cn.xin.learn.community.entity.params.user.SaveUpdateUserParam;
 import cn.xin.learn.community.entity.po.CommunityUser;
@@ -46,5 +48,13 @@ public interface CommunityUserService extends IService<CommunityUser> {
      * @return 是否删除成功
      */
     Boolean deleteUser(List<Long> userIds);
+
+    /**
+     * 登录
+     *
+     * @param param 登录参数
+     * @return 用户信息
+     */
+    CommunityUserDto login(LoginUserParam param);
 }
 

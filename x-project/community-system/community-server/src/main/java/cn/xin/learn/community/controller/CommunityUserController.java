@@ -1,6 +1,8 @@
 package cn.xin.learn.community.controller;
 
 
+import cn.xin.learn.community.entity.dto.user.CommunityUserDto;
+import cn.xin.learn.community.entity.params.user.LoginUserParam;
 import cn.xin.learn.community.entity.params.user.PageUserParam;
 import cn.xin.learn.community.entity.params.user.SaveUpdateUserParam;
 import cn.xin.learn.community.entity.po.CommunityUser;
@@ -35,6 +37,15 @@ public class CommunityUserController {
     public Boolean registerUser(@Validated @RequestBody SaveUpdateUserParam params) {
         return communityUserService.registerUser(params);
     }
+
+    /**
+     * 登录
+     */
+    @PostMapping("loginUser")
+    public CommunityUserDto login(@Validated @RequestBody LoginUserParam param) {
+        return communityUserService.login(param);
+    }
+
 
     /**
      * 新增或者修改用户
