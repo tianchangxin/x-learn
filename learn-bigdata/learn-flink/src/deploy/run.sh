@@ -1,0 +1,1 @@
+flink run -c cn.xin.learn.flink.sourcescode.simple.WordCount /Users/tiancx/JavaSE/x-learn/learn-bigdata/learn-flink/target/learn-flink-1.0.0-SNAPSHOT.jar
