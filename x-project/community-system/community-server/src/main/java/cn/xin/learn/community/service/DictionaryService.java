@@ -30,4 +30,9 @@ public interface DictionaryService extends IService<Dictionary> {
      * 查询列表
      */
     List<DictDto> listDict(QueryDictParam param);
+
+    /**
+     * 删除字典
+     */
+    Boolean deleteDict(Long id);
 }

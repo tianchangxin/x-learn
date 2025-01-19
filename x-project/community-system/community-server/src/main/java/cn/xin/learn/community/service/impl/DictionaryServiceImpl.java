@@ -8,6 +8,7 @@ import cn.xin.learn.community.entity.params.dict.QueryDictParam;
 import cn.xin.learn.community.entity.params.dict.SaveUpdateDictParam;
 import cn.xin.learn.community.entity.po.Dictionary;
 import cn.xin.learn.community.entity.vo.PageVo;
+import cn.xin.learn.community.exceptions.asserts.CommunityAssert;
 import cn.xin.learn.community.service.DictionaryService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -73,6 +74,17 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryDao, Dictionary
                 .eq(Objects.nonNull(param.getDictStatus()), Dictionary::getDictStatus, param.getDictStatus());
         List<Dictionary> list = this.list(wrapper);
         return BeanUtil.copyToList(list, DictDto.class);
+    }
+
+    /**
+     * 删除字典
+     *
+     * @param id
+     */
+    @Override
+    public Boolean deleteDict(Long id) {
+        CommunityAssert.notNull(id, "id不能为空");
+        return this.removeById(id);
     }
 }
 

@@ -8,9 +8,7 @@ import cn.xin.learn.community.entity.vo.PageVo;
 import cn.xin.learn.community.service.DictionaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,7 +26,7 @@ public class DictController {
     /**
      * 保存或更新字典
      */
-    @RequestMapping("saveOrUpdateDict")
+    @PostMapping("saveOrUpdateDict")
     public Boolean saveUpdateDict(@Validated @RequestBody SaveUpdateDictParam param) {
         return dictionaryService.saveOrUpdateDictionary(param);
     }
@@ -36,7 +34,7 @@ public class DictController {
     /**
      * 分页查询字典
      */
-    @RequestMapping("pageDict")
+    @PostMapping("pageDict")
     public PageVo<DictDto> pageDict(@Validated @RequestBody PageDictParam param) {
         return dictionaryService.pageDict(param);
     }
@@ -44,9 +42,17 @@ public class DictController {
     /**
      * 查询字典列表
      */
-    @RequestMapping("listDict")
+    @PostMapping("listDict")
     public List<DictDto> listDict(@Validated @RequestBody QueryDictParam param) {
         return dictionaryService.listDict(param);
+    }
+
+    /**
+     * 删除字典
+     */
+    @GetMapping("deleteDict")
+    public Boolean deleteDict(Long id) {
+        return dictionaryService.deleteDict(id);
     }
 
 }
