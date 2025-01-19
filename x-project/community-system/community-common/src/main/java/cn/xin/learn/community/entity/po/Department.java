@@ -1,5 +1,6 @@
 package cn.xin.learn.community.entity.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
@@ -13,7 +14,7 @@ import lombok.Data;
 @SuppressWarnings("serial")
 public class Department extends BasePo {
     //组织id
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Long deptId;
     //部门名称
     private String deptName;

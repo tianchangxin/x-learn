@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xin.learn.community.dao.DictionaryDao">
+
+    <resultMap id="BaseResultMap" type="cn.xin.learn.community.po.Dictionary">
+        <id property="dictId" column="dict_id" jdbcType="INTEGER"/>
+        <result property="dictName" column="dict_name" jdbcType="VARCHAR"/>
+        <result property="dictCode" column="dict_code" jdbcType="VARCHAR"/>
+        <result property="dictStatus" column="dict_status" jdbcType="INTEGER"/>
+        <result property="dictRemark" column="dict_remark" jdbcType="VARCHAR"/>
+        <result property="dictItem" column="dict_item" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+        <result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+        <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        dict_id,dict_name,dict_code,
+        dict_status,dict_remark,dict_item,
+        create_time,update_time,create_user,
+        update_user,is_delete
+    </sql>
+</mapper>
