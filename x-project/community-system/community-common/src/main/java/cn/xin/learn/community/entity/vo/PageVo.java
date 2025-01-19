@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,9 +21,9 @@ import java.util.List;
 @Accessors(chain = true)
 public class PageVo<T> {
     //总页数
-    private Long totalPage;
+    private Long totalPage = 0L;
     //总条数
-    private Long totalElement;
+    private Long totalElement = 0L;
     //数据
-    private List<T> items;
+    private List<T> items = new ArrayList<>();
 }

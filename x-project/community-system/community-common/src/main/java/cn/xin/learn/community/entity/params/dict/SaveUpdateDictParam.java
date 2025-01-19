@@ -1,20 +1,21 @@
-package cn.xin.learn.community.entity.po;
+package cn.xin.learn.community.entity.params.dict;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author xin
- * @description: 字典表实体
+ * @description: 保存或更新字典参数
  * @date 2025年01月19日
  */
 @Data
-public class Dictionary extends BasePo {
+@AllArgsConstructor
+@NoArgsConstructor
+public class SaveUpdateDictParam {
     /**
-     * 字典id
+     * 字典id(新增时不传，更新时传)
      */
-    @TableId(type = IdType.AUTO)
     private Long dictId;
     /**
      * 字典名称
