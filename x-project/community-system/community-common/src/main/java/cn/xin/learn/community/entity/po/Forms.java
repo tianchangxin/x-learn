@@ -8,36 +8,40 @@ import java.util.Date;
 
 /**
  * @author xin
- * @description: 字典表实体
+ * @description: 表单 表格
  * @date 2025年01月19日
  */
 @Data
-public class Dictionary extends BasePo {
+public class Forms extends BasePo {
+    /**
+     * 表单项id
+     */
+    @TableId(type = IdType.AUTO)
+    private Long formsId;
+    /**
+     * 表单项标题
+     */
+    private String formsTitle;
+    /**
+     * 表单项类型
+     */
+    private String formsType;
+    /**
+     * 是否必填 0-否，1-是
+     */
+    private Integer formsMustFill;
     /**
      * 字典id
      */
-    @TableId(type = IdType.AUTO)
     private Long dictId;
     /**
-     * 字典名称
+     * 表单状态 0-禁用，1-启用
      */
-    private String dictName;
+    private Integer formsStatus;
     /**
-     * 字典编码
+     * 表单备注
      */
-    private String dictCode;
-    /**
-     * 状态：0-禁用，1-启用
-     */
-    private Integer dictStatus;
-    /**
-     * 字典备注
-     */
-    private String dictRemark;
-    /**
-     * 字典项
-     */
-    private String dictItem;
+    private String formsRemark;
     /**
      * 创建时间
      */
