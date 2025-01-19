@@ -1,0 +1,9 @@
+server:
+  servlet:
+    context-path: /community
+spring:
+  mysql:
+    url: jdbc:mysql://localhost:3307/community_system?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: tcx119
+    driver-class-name: com.mysql.cj.jdbc.Driver

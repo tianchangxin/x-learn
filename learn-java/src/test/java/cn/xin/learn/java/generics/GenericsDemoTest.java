@@ -17,11 +17,20 @@ import java.util.List;
  * @date 2024年08月15日
  */
 
-class A{}
-class B extends A {}
-class C extends B {}
-class D extends C {}
-class E extends D {}
+class A {
+}
+
+class B extends A {
+}
+
+class C extends B {
+}
+
+class D extends C {
+}
+
+class E extends D {
+}
 
 public class GenericsDemoTest {
 
@@ -55,7 +64,7 @@ public class GenericsDemoTest {
     @Test
     public void testGenericsExtends() {
         //extends 只能读取，不能添加（null除外）
-        List<? extends A> listA = new ArrayList<>(Arrays.asList(new A(),new B(), new C()));
+        List<? extends A> listA = new ArrayList<>(Arrays.asList(new A(), new B(), new C()));
         List<? extends B> listB = new ArrayList<>(Arrays.asList(new B(), new C()));
 //        listA.forEach(x-> System.out.println(x.getClass().getSimpleName()));
         testExtends(listA);
@@ -64,7 +73,7 @@ public class GenericsDemoTest {
 
     public void testExtends(List<? extends A> listA) {
 //        listA.add(new A());
-        listA.forEach(x-> System.out.println(x.getClass().getSimpleName()));
+        listA.forEach(x -> System.out.println(x.getClass().getSimpleName()));
         System.out.println("===================================");
     }
 
@@ -72,7 +81,7 @@ public class GenericsDemoTest {
     @Test
     public void testGenericsSuper() {
         //super
-        List<? super B> listB = new ArrayList<>( Arrays.asList(new A(),new B(), new C()));
+        List<? super B> listB = new ArrayList<>(Arrays.asList(new A(), new B(), new C()));
         List<? super A> listA = new ArrayList<>(Arrays.asList(new C(), new D()));
         ArrayList<Object> list = new ArrayList<>();
 //        testSuper(list);
@@ -82,13 +91,13 @@ public class GenericsDemoTest {
         list1.add(1);
         ArrayList<Number> list2 = new ArrayList<>();
 
-        testSuper(list2,list1);
+        testSuper(list2, list1);
         System.out.println("list2 = " + list2);
 
     }
 
     //可以传入的实参的类型是T或者T的父类类型，可以往里面添加T或者T的子类类型
-    public static <T> void testSuper(List<? super T> listB , List<? extends T> listA) {
+    public static <T> void testSuper(List<? super T> listB, List<? extends T> listA) {
         for (int i = 0; i < listA.size(); i++) {
             T t = listA.get(i);
             listB.add(t);
@@ -121,11 +130,9 @@ public class GenericsDemoTest {
         System.out.println(genericType.getTypeName());
         Type[] bounds = typeVariable.getBounds();
         for (Type bound : bounds) {
-            System.out.println("边界："+bound.getTypeName());
+            System.out.println("边界：" + bound.getTypeName());
         }
         System.out.println("===================================");
-
-
 
 
     }
@@ -141,34 +148,34 @@ public class GenericsDemoTest {
         Field list = aClass.getDeclaredField("list");
         list.setAccessible(true);
         Type genericType1 = list.getGenericType();
-        if(genericType1 instanceof ParameterizedType) {
+        if (genericType1 instanceof ParameterizedType) {
             System.out.println("list 是参数化类型");
             System.out.println(genericType1.getTypeName());
             ParameterizedType parameterizedType = (ParameterizedType) genericType1;
             Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
             for (Type actualTypeArgument : actualTypeArguments) {
-                System.out.println("实际类型参数："+actualTypeArgument.getTypeName());
+                System.out.println("实际类型参数：" + actualTypeArgument.getTypeName());
             }
             Type rawType = parameterizedType.getRawType();
-            System.out.println("原始类型："+rawType.getTypeName());
+            System.out.println("原始类型：" + rawType.getTypeName());
         }
 
         System.out.println("===================================");
         Field map = aClass.getDeclaredField("map");
         map.setAccessible(true);
         Type genericType2 = map.getGenericType();
-        if(genericType2 instanceof ParameterizedType) {
+        if (genericType2 instanceof ParameterizedType) {
             System.out.println("map 是参数化类型");
             System.out.println(genericType2.getTypeName());
             ParameterizedType parameterizedType = (ParameterizedType) genericType2;
             Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
             for (Type actualTypeArgument : actualTypeArguments) {
-                System.out.println("实际类型参数："+actualTypeArgument.getTypeName());
+                System.out.println("实际类型参数：" + actualTypeArgument.getTypeName());
             }
             Type rawType = parameterizedType.getRawType();
-            System.out.println("原始类型："+rawType.getTypeName());
+            System.out.println("原始类型：" + rawType.getTypeName());
         }
     }
 
-
+    
 }

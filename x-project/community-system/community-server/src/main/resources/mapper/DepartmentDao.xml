@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xin.learn.community.dao.DepartmentDao">
+
+    <resultMap type="cn.xin.learn.community.entity.po.Department" id="DepartmentMap">
+        <result property="deptId" column="dept_id" jdbcType="INTEGER"/>
+        <result property="deptName" column="dept_name" jdbcType="VARCHAR"/>
+        <result property="deptParentId" column="dept_parent_id" jdbcType="INTEGER"/>
+        <result property="deptParentName" column="dept_parent_name" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+        <result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+        <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="departmentMap" type="cn.xin.learn.community.entity.dto.department.DepartmentInfoDto">
+        <result property="deptId" column="dept_id" jdbcType="INTEGER"/>
+        <result property="deptName" column="dept_name" jdbcType="VARCHAR"/>
+        <result property="deptParentId" column="dept_parent_id" jdbcType="INTEGER"/>
+        <result property="deptParentName" column="dept_parent_name" jdbcType="VARCHAR"/>
+        <collection property="children" column="dept_id"
+                    select="queryDepartmentListByParentId">
+
+        </collection>
+    </resultMap>
+
+
+    <select id="queryDepartmentList"
+            resultType="cn.xin.learn.community.entity.dto.department.DepartmentInfoDto"
+            resultMap="departmentMap">
+        select dept_id,
+               dept_name,
+               dept_parent_id,
+               dept_parent_name
+        from department
+        where is_delete = 0
+          and dept_parent_id = 0
+    </select>
+
+    <select id="queryDepartmentListByParentId"
+            resultType="cn.xin.learn.community.entity.dto.department.DepartmentInfoDto"
+            resultMap="departmentMap">
+        select dept_id,
+               dept_name,
+               dept_parent_id,
+               dept_parent_name,
+               create_time,
+               update_time,
+               create_user,
+               update_user
+        from department
+        where dept_parent_id = #{deptId}
+          and is_delete = 0
+    </select>
+
+</mapper>
+

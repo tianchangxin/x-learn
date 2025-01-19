@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xin.learn.community.dao.TaskDao">
+
+    <resultMap type="cn.xin.learn.community.entity.po.Task" id="TaskMap">
+        <result property="taskId" column="task_id" jdbcType="INTEGER"/>
+        <result property="taskName" column="task_name" jdbcType="VARCHAR"/>
+        <result property="taskType" column="task_type" jdbcType="INTEGER"/>
+        <result property="startTime" column="start_time" jdbcType="TIMESTAMP"/>
+        <result property="endTime" column="end_time" jdbcType="TIMESTAMP"/>
+        <result property="deptId" column="dept_id" jdbcType="INTEGER"/>
+        <result property="deptName" column="dept_name" jdbcType="VARCHAR"/>
+        <result property="executor" column="executor" jdbcType="VARCHAR"/>
+        <result property="domainType" column="domain_type" jdbcType="INTEGER"/>
+        <result property="taskStatus" column="task_status" jdbcType="INTEGER"/>
+        <result property="taskContent" column="task_content" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+        <result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+        <result property="delete" column="delete" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TaskMap">
+        select task_id,
+               task_name,
+               task_type,
+               start_time,
+               end_time,
+               dept_id,
+               dept_name,
+               executor,
+               domain_type,
+               task_status,
+               task_content,
+               create_time,
+               update_time,
+               create_user,
+               update_user,
+        delete
+        from task
+        where task_id = #{taskId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TaskMap">
+        select
+        task_id, task_name, task_type, start_time, end_time, dept_id, dept_name, executor, domain_type, task_status,
+        task_content, create_time, update_time, create_user, update_user, delete
+        from task
+        <where>
+            <if test="taskId != null">
+                and task_id = #{taskId}
+            </if>
+            <if test="taskName != null and taskName != ''">
+                and task_name = #{taskName}
+            </if>
+            <if test="taskType != null">
+                and task_type = #{taskType}
+            </if>
+            <if test="startTime != null">
+                and start_time = #{startTime}
+            </if>
+            <if test="endTime != null">
+                and end_time = #{endTime}
+            </if>
+            <if test="deptId != null">
+                and dept_id = #{deptId}
+            </if>
+            <if test="deptName != null and deptName != ''">
+                and dept_name = #{deptName}
+            </if>
+            <if test="executor != null and executor != ''">
+                and executor = #{executor}
+            </if>
+            <if test="domainType != null">
+                and domain_type = #{domainType}
+            </if>
+            <if test="taskStatus != null">
+                and task_status = #{taskStatus}
+            </if>
+            <if test="taskContent != null and taskContent != ''">
+                and task_content = #{taskContent}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="createUser != null and createUser != ''">
+                and create_user = #{createUser}
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                and update_user = #{updateUser}
+            </if>
+            <if test="delete != null">
+                and delete = #{delete}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from task
+        <where>
+            <if test="taskId != null">
+                and task_id = #{taskId}
+            </if>
+            <if test="taskName != null and taskName != ''">
+                and task_name = #{taskName}
+            </if>
+            <if test="taskType != null">
+                and task_type = #{taskType}
+            </if>
+            <if test="startTime != null">
+                and start_time = #{startTime}
+            </if>
+            <if test="endTime != null">
+                and end_time = #{endTime}
+            </if>
+            <if test="deptId != null">
+                and dept_id = #{deptId}
+            </if>
+            <if test="deptName != null and deptName != ''">
+                and dept_name = #{deptName}
+            </if>
+            <if test="executor != null and executor != ''">
+                and executor = #{executor}
+            </if>
+            <if test="domainType != null">
+                and domain_type = #{domainType}
+            </if>
+            <if test="taskStatus != null">
+                and task_status = #{taskStatus}
+            </if>
+            <if test="taskContent != null and taskContent != ''">
+                and task_content = #{taskContent}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="createUser != null and createUser != ''">
+                and create_user = #{createUser}
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                and update_user = #{updateUser}
+            </if>
+            <if test="delete != null">
+                and delete = #{delete}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="taskId" useGeneratedKeys="true">
+        insert into task(task_name, task_type, start_time, end_time, dept_id, dept_name, executor, domain_type,
+                         task_status, task_content, create_time, update_time, create_user, update_user, delete)
+        values (#{taskName}, #{taskType}, #{startTime}, #{endTime}, #{deptId}, #{deptName}, #{executor}, #{domainType},
+                #{taskStatus}, #{taskContent}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser}, #{delete})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="taskId" useGeneratedKeys="true">
+        insert into task(task_name, task_type, start_time, end_time, dept_id, dept_name, executor, domain_type,
+        task_status, task_content, create_time, update_time, create_user, update_user, delete)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.taskName}, #{entity.taskType}, #{entity.startTime}, #{entity.endTime}, #{entity.deptId},
+            #{entity.deptName}, #{entity.executor}, #{entity.domainType}, #{entity.taskStatus}, #{entity.taskContent},
+            #{entity.createTime}, #{entity.updateTime}, #{entity.createUser}, #{entity.updateUser}, #{entity.delete})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="taskId" useGeneratedKeys="true">
+        insert into task(task_name, task_type, start_time, end_time, dept_id, dept_name, executor, domain_type,
+        task_status, task_content, create_time, update_time, create_user, update_user, delete)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.taskName}, #{entity.taskType}, #{entity.startTime}, #{entity.endTime}, #{entity.deptId},
+            #{entity.deptName}, #{entity.executor}, #{entity.domainType}, #{entity.taskStatus}, #{entity.taskContent},
+            #{entity.createTime}, #{entity.updateTime}, #{entity.createUser}, #{entity.updateUser}, #{entity.delete})
+        </foreach>
+        on duplicate key update
+        task_name = values(task_name),
+        task_type = values(task_type),
+        start_time = values(start_time),
+        end_time = values(end_time),
+        dept_id = values(dept_id),
+        dept_name = values(dept_name),
+        executor = values(executor),
+        domain_type = values(domain_type),
+        task_status = values(task_status),
+        task_content = values(task_content),
+        create_time = values(create_time),
+        update_time = values(update_time),
+        create_user = values(create_user),
+        update_user = values(update_user),
+        delete = values(delete)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update task
+        <set>
+            <if test="taskName != null and taskName != ''">
+                task_name = #{taskName},
+            </if>
+            <if test="taskType != null">
+                task_type = #{taskType},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test="deptName != null and deptName != ''">
+                dept_name = #{deptName},
+            </if>
+            <if test="executor != null and executor != ''">
+                executor = #{executor},
+            </if>
+            <if test="domainType != null">
+                domain_type = #{domainType},
+            </if>
+            <if test="taskStatus != null">
+                task_status = #{taskStatus},
+            </if>
+            <if test="taskContent != null and taskContent != ''">
+                task_content = #{taskContent},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="createUser != null and createUser != ''">
+                create_user = #{createUser},
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                update_user = #{updateUser},
+            </if>
+            <if test="delete != null">
+                delete = #{delete},
+            </if>
+        </set>
+        where task_id = #{taskId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from task
+        where task_id = #{taskId}
+    </delete>
+
+</mapper>
+

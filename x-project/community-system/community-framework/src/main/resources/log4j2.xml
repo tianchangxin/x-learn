@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Configuration monitorInterval="30">
+    <!--https://logging.apache.org/log4j/2.x/manual/appenders.html-->
+    <!--变量配置-->
+    <Properties>
+        <!-- 格式化输出：%date表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %msg：日志消息，%n是换行符-->
+        <!-- %logger{36} 表示 Logger 名字最长36个字符 -->
+        <!-- 配色教程 %style{内容}{颜色} -->
+        <property name="CLASS_PATH" value="%style{%C{1}.%M}{blue}"/>
+        <property name="TIME" value="%d{yyyy-MM-dd HH:mm:ss.SSS}"/>
+        <property name="LOG_PATTERN"
+                  value="${TIME} [%thread] %-5level &lt;x-learn&gt; ${CLASS_PATH} LINE:%L - %msg%xEx%n"/>
+
+        <!-- 定义日志存储的路径 -->
+        <!--        <property name="FILE_PATH" value="/Users/tiancx/work/" />-->
+        <!--        <property name="FILE_NAME" value="learn_log_info" />-->
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+    </Appenders>
+    <Loggers>
+        <!--includeLocation : Extracting location is an expensive operation (it can make logging 5 - 20 times slower)-->
+        <asyncRoot level="INFO" includeLocation="true">
+            <!--            如果需要保存到文件，加上下面这行-->
+            <!--            <AppenderRef ref="RollingFile" />-->
+            <AppenderRef ref="Console"/>
+        </asyncRoot>
+        <logger name="com.alibaba.druid.pool.DruidAbstractDataSource" level="info"/>
+    </Loggers>
+</Configuration>

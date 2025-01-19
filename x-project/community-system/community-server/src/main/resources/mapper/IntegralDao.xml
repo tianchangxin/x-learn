@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xin.learn.community.dao.IntegralDao">
+
+    <resultMap type="cn.xin.learn.community.entity.po.Integral" id="IntegralMap">
+        <result property="integralId" column="integral_id" jdbcType="INTEGER"/>
+        <result property="integralOrigin" column="integral_origin" jdbcType="VARCHAR"/>
+        <result property="integralNum" column="integral_num" jdbcType="NUMERIC"/>
+        <result property="belongUser" column="belong_user" jdbcType="VARCHAR"/>
+        <result property="belongUserId" column="belong_user_id" jdbcType="INTEGER"/>
+        <result property="integralType" column="integral_type" jdbcType="NUMERIC"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+        <result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+        <result property="delete" column="delete" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="IntegralMap">
+        select integral_id,
+               integral_origin,
+               integral_num,
+               belong_user,
+               belong_user_id,
+               integral_type,
+               create_time,
+               update_time,
+               create_user,
+               update_user,
+        delete
+        from integral
+        where integral_id = #{integralId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="IntegralMap">
+        select
+        integral_id, integral_origin, integral_num, belong_user, belong_user_id, integral_type, create_time,
+        update_time, create_user, update_user, delete
+        from integral
+        <where>
+            <if test="integralId != null">
+                and integral_id = #{integralId}
+            </if>
+            <if test="integralOrigin != null and integralOrigin != ''">
+                and integral_origin = #{integralOrigin}
+            </if>
+            <if test="integralNum != null">
+                and integral_num = #{integralNum}
+            </if>
+            <if test="belongUser != null and belongUser != ''">
+                and belong_user = #{belongUser}
+            </if>
+            <if test="belongUserId != null">
+                and belong_user_id = #{belongUserId}
+            </if>
+            <if test="integralType != null">
+                and integral_type = #{integralType}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="createUser != null and createUser != ''">
+                and create_user = #{createUser}
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                and update_user = #{updateUser}
+            </if>
+            <if test="delete != null">
+                and delete = #{delete}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from integral
+        <where>
+            <if test="integralId != null">
+                and integral_id = #{integralId}
+            </if>
+            <if test="integralOrigin != null and integralOrigin != ''">
+                and integral_origin = #{integralOrigin}
+            </if>
+            <if test="integralNum != null">
+                and integral_num = #{integralNum}
+            </if>
+            <if test="belongUser != null and belongUser != ''">
+                and belong_user = #{belongUser}
+            </if>
+            <if test="belongUserId != null">
+                and belong_user_id = #{belongUserId}
+            </if>
+            <if test="integralType != null">
+                and integral_type = #{integralType}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="createUser != null and createUser != ''">
+                and create_user = #{createUser}
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                and update_user = #{updateUser}
+            </if>
+            <if test="delete != null">
+                and delete = #{delete}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="integralId" useGeneratedKeys="true">
+        insert into integral(integral_origin, integral_num, belong_user, belong_user_id, integral_type, create_time,
+                             update_time, create_user, update_user, delete)
+        values (#{integralOrigin}, #{integralNum}, #{belongUser}, #{belongUserId}, #{integralType}, #{createTime},
+                #{updateTime}, #{createUser}, #{updateUser}, #{delete})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="integralId" useGeneratedKeys="true">
+        insert into integral(integral_origin, integral_num, belong_user, belong_user_id, integral_type, create_time,
+        update_time, create_user, update_user, delete)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.integralOrigin}, #{entity.integralNum}, #{entity.belongUser}, #{entity.belongUserId},
+            #{entity.integralType}, #{entity.createTime}, #{entity.updateTime}, #{entity.createUser},
+            #{entity.updateUser}, #{entity.delete})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="integralId" useGeneratedKeys="true">
+        insert into integral(integral_origin, integral_num, belong_user, belong_user_id, integral_type, create_time,
+        update_time, create_user, update_user, delete)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.integralOrigin}, #{entity.integralNum}, #{entity.belongUser}, #{entity.belongUserId},
+            #{entity.integralType}, #{entity.createTime}, #{entity.updateTime}, #{entity.createUser},
+            #{entity.updateUser}, #{entity.delete})
+        </foreach>
+        on duplicate key update
+        integral_origin = values(integral_origin),
+        integral_num = values(integral_num),
+        belong_user = values(belong_user),
+        belong_user_id = values(belong_user_id),
+        integral_type = values(integral_type),
+        create_time = values(create_time),
+        update_time = values(update_time),
+        create_user = values(create_user),
+        update_user = values(update_user),
+        delete = values(delete)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update integral
+        <set>
+            <if test="integralOrigin != null and integralOrigin != ''">
+                integral_origin = #{integralOrigin},
+            </if>
+            <if test="integralNum != null">
+                integral_num = #{integralNum},
+            </if>
+            <if test="belongUser != null and belongUser != ''">
+                belong_user = #{belongUser},
+            </if>
+            <if test="belongUserId != null">
+                belong_user_id = #{belongUserId},
+            </if>
+            <if test="integralType != null">
+                integral_type = #{integralType},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="createUser != null and createUser != ''">
+                create_user = #{createUser},
+            </if>
+            <if test="updateUser != null and updateUser != ''">
+                update_user = #{updateUser},
+            </if>
+            <if test="delete != null">
+                delete = #{delete},
+            </if>
+        </set>
+        where integral_id = #{integralId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from integral
+        where integral_id = #{integralId}
+    </delete>
+
+</mapper>
+

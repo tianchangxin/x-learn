@@ -1,4 +1,4 @@
-package cn.xin.learn.server.service;
+package cn.xin.learn.community.service;
 
 import org.springframework.aop.framework.AopContext;
 
@@ -9,7 +9,7 @@ import org.springframework.aop.framework.AopContext;
  */
 public interface ProxyService<T> {
     @SuppressWarnings("unchecked")
-    default T getProxy(){
+    default T getProxy() {
         return (T) AopContext.currentProxy();
     }
 }
