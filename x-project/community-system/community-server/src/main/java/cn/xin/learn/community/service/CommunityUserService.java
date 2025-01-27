@@ -56,5 +56,7 @@ public interface CommunityUserService extends IService<CommunityUser> {
      * @return 用户信息
      */
     CommunityUserDto login(LoginUserParam param);
+
+
 }
 

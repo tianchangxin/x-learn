@@ -1,20 +1,19 @@
-package cn.xin.learn.community.entity.po;
+package cn.xin.learn.community.entity.params.integral;
 
-
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * 积分;(Integral)表实体类
- *
- * @author makejava
- * @since 2024-12-24 15:42:25
+ * @author xin
+ * @description: 保存更新积分参数
+ * @date 2025年01月27日
  */
 @Data
-public class Integral extends BasePo {
-    //积分ID
-    @TableId(type = IdType.AUTO)
+@AllArgsConstructor
+@NoArgsConstructor
+public class SaveUpdateIntegralParam {
+    //积分ID(新增时不传，修改时传)
     private Long integralId;
     //积分来源
     private String integralOrigin;
@@ -26,6 +25,4 @@ public class Integral extends BasePo {
     private Integer belongUserId;
     //积分类型（0-使用、1-新增）
     private Integer integralType;
-
 }
-
