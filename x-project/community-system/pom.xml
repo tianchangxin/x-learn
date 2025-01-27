@@ -33,6 +33,7 @@
         <commons-collections4>4.4</commons-collections4>
         <commons-lang3>3.17.0</commons-lang3>
         <hutool.version>5.8.29</hutool.version>
+        <feign.version>10.1.0</feign.version>
     </properties>
 
     <dependencyManagement>
@@ -146,6 +147,12 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-core</artifactId>
+                <version>${feign.version}</version>
             </dependency>
 
         </dependencies>
