@@ -8,11 +8,13 @@ import cn.xin.learn.community.entity.params.integral.QueryIntegralParam;
 import cn.xin.learn.community.entity.params.integral.SaveUpdateIntegralParam;
 import cn.xin.learn.community.entity.po.Integral;
 import cn.xin.learn.community.entity.vo.PageVo;
+import cn.xin.learn.community.enums.IntegralEnums;
 import cn.xin.learn.community.exceptions.asserts.CommunityAssert;
 import cn.xin.learn.community.service.IntegralService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -94,6 +96,26 @@ public class IntegralServiceImpl extends ServiceImpl<IntegralDao, Integral> impl
     public Boolean deleteIntegral(Long integralId) {
         CommunityAssert.notNull(integralId, "积分ID不能为空");
         return this.removeById(integralId);
+    }
+
+    /**
+     * 查询用户积分
+     *
+     * @param userId 用户ID
+     */
+    @Override
+    public Double queryUserIntegral(Long userId) {
+        CommunityAssert.notNull(userId, "用户ID不能为空");
+        LambdaQueryWrapper<Integral> wrapper = new LambdaQueryWrapper<Integral>()
+                .eq(Integral::getBelongUserId, userId);
+        List<Integral> list = this.list(wrapper);
+        if (CollectionUtils.isNotEmpty(list)) {
+            //新增积分总和减去使用积分总和
+            double addIntegral = list.stream().filter(x -> Objects.equals(x.getIntegralType(), IntegralEnums.ADD.getCode())).mapToDouble(Integral::getIntegralNum).sum();
+            double useIntegral = list.stream().filter(x -> Objects.equals(x.getIntegralType(), IntegralEnums.USE.getCode())).mapToDouble(Integral::getIntegralNum).sum();
+            return addIntegral - useIntegral;
+        }
+        return 0.0;
     }
 }
 

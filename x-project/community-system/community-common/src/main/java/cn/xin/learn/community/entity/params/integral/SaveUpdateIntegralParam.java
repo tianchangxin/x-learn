@@ -1,6 +1,7 @@
 package cn.xin.learn.community.entity.params.integral;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class SaveUpdateIntegralParam {
     //积分ID(新增时不传，修改时传)
     private Long integralId;
@@ -22,7 +24,7 @@ public class SaveUpdateIntegralParam {
     //归属用户
     private String belongUser;
     //归属用户Id
-    private Integer belongUserId;
+    private Long belongUserId;
     //积分类型（0-使用、1-新增）
     private Integer integralType;
 }

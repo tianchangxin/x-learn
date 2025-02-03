@@ -37,5 +37,10 @@ public interface IntegralService extends IService<Integral> {
      * 删除积分记录
      */
     Boolean deleteIntegral(Long integralId);
+
+    /**
+     * 查询用户积分
+     */
+    Double queryUserIntegral(Long userId);
 }
 

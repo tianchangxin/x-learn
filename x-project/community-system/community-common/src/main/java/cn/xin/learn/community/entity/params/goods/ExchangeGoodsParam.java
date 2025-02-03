@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author xin
@@ -16,7 +16,7 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 public class ExchangeGoodsParam {
     //商品Id
-    @NotEmpty(message = "商品ID不能为空")
+    @NotNull(message = "商品ID不能为空")
     private Long goodsId;
 
 }

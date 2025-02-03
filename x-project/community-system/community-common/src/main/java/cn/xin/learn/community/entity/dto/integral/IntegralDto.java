@@ -22,7 +22,7 @@ public class IntegralDto {
     //归属用户
     private String belongUser;
     //归属用户Id
-    private Integer belongUserId;
+    private Long belongUserId;
     //积分类型（0-使用、1-新增）
     private Integer integralType;
 
