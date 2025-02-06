@@ -9,6 +9,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,6 +31,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = CommunityException.class)
     @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Response handleCommunityException(CommunityException e, HttpServletRequest request) {
         log.error("社区异常：{}", e.getMessage());
         return Response.builder()
@@ -46,6 +48,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = CommunityPermissionException.class)
     @ResponseBody
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     public Response handleCommunityPermissionException(CommunityPermissionException e, HttpServletRequest request) {
         log.error("社区权限异常：{}", e.getMessage());
         return Response.builder()
@@ -62,6 +65,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Response handleException(Exception e, HttpServletRequest request) {
         log.error("异常：{}", e.getMessage());
         if (e instanceof MissingServletRequestParameterException) {

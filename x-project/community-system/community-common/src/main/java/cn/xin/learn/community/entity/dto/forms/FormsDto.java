@@ -1,20 +1,23 @@
-package cn.xin.learn.community.entity.po;
+package cn.xin.learn.community.entity.dto.forms;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 /**
  * @author xin
- * @description: 表单 表格
- * @date 2025年01月19日
+ * @description: 表单项实体类
+ * @date 2025年02月05日
  */
 @Data
-public class Forms extends BasePo {
+@AllArgsConstructor
+@NoArgsConstructor
+public class FormsDto {
     /**
      * 表单项id
      */
-    @TableId(type = IdType.AUTO)
     private Long formsId;
     /**
      * 表单项标题
@@ -41,4 +44,18 @@ public class Forms extends BasePo {
      */
     private String formsRemark;
 
+    //创建时间
+    private Date createTime;
+
+    //修改时间
+    private Date updateTime;
+
+    //创建用户
+    private String createUser;
+
+    //修改用户
+    private String updateUser;
+
+    //是否删除（0-未删除，1-删除）
+    private Integer isDelete;
 }

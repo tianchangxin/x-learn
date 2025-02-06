@@ -90,6 +90,11 @@
             <artifactId>community-common</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-core</artifactId>
+        </dependency>
+
 
     </dependencies>
 

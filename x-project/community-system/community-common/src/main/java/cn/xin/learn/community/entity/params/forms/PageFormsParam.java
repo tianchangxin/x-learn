@@ -1,20 +1,22 @@
-package cn.xin.learn.community.entity.po;
+package cn.xin.learn.community.entity.params.forms;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import cn.xin.learn.community.entity.params.PageParam;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author xin
- * @description: 表单 表格
- * @date 2025年01月19日
+ * @description: 分页查询表单项参数
+ * @date 2025年02月05日
  */
 @Data
-public class Forms extends BasePo {
+@AllArgsConstructor
+@NoArgsConstructor
+public class PageFormsParam extends PageParam {
     /**
      * 表单项id
      */
-    @TableId(type = IdType.AUTO)
     private Long formsId;
     /**
      * 表单项标题
@@ -40,5 +42,4 @@ public class Forms extends BasePo {
      * 表单备注
      */
     private String formsRemark;
-
 }

@@ -44,4 +44,5 @@ public class UserCheck {
                 "用户名或邮箱不能为空");
         CommunityAssert.notEmpty(userInfo.getPwd(), "密码不能为空");
     }
+    
 }

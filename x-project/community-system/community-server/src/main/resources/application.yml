@@ -7,3 +7,8 @@ spring:
     username: root
     password: tcx119
     driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
