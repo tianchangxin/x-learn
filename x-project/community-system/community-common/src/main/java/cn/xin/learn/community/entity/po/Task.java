@@ -1,6 +1,8 @@
 package cn.xin.learn.community.entity.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
 
 import java.util.Date;
 
@@ -10,10 +12,11 @@ import java.util.Date;
  * @author makejava
  * @since 2024-12-24 15:42:28
  */
+@Data
 @SuppressWarnings("serial")
 public class Task extends BasePo {
     //任务ID
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer taskId;
     //任务名称
     private String taskName;
@@ -35,5 +38,7 @@ public class Task extends BasePo {
     private Integer taskStatus;
     //任务内容
     private String taskContent;
+    //模板id
+    private Long templateId;
 }
 
