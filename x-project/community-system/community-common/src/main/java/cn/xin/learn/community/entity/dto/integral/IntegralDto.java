@@ -15,6 +15,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IntegralDto {
+    //积分ID
+    private Long integralId;
     //积分来源
     private String integralOrigin;
     //积分数量
