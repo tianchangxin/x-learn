@@ -1,17 +1,23 @@
-package cn.xin.learn.community.entity.po;
+package cn.xin.learn.community.entity.dto.problem;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 /**
- * 问题;(Problem)表实体类
- *
- * @author makejava
- * @since 2024-12-24 15:42:26
+ * @Title: ProblemDto
+ * @Author yinan
+ * @Package cn.xin.learn.community.entity.dto.problem
+ * @Date 2025/1/20 16:02
+ * @description:
  */
-@SuppressWarnings("serial")
 @Data
-public class Problem extends BasePo {
+@NoArgsConstructor
+@AllArgsConstructor
+public class ProblemDto {
     //问题ID
     @TableId
     private Integer problemId;
@@ -37,8 +43,14 @@ public class Problem extends BasePo {
     private Integer dealUserId;
     //处理人
     private String dealUser;
+    //创建时间
+    private Date createTime;
+    //修改时间
+    private Date updateTime;
+    //创建用户
+    private String createUser;
+    //修改用户
+    private String updateUser;
     //是否删除（0-未删除，1-删除）
     private Integer isDelete;
-
 }
-

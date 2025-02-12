@@ -19,7 +19,7 @@
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
         <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
         <result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
-        <result property="delete" column="delete" jdbcType="INTEGER"/>
+        <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
     </resultMap>
 
     <!--查询单个-->
@@ -40,7 +40,7 @@
                update_time,
                create_user,
                update_user,
-        delete
+        is_delete
         from problem
         where problem_id = #{problemId}
     </select>
@@ -50,7 +50,7 @@
         select
         problem_id, problem_name, problem_type, problem_address, problem_desc, problem_pic, problem_notes,
         problem_status, confirm_user_id, confirm_user, deal_user_id, deal_user, create_time, update_time, create_user,
-        update_user, delete
+        update_user, is_delete
         from problem
         <where>
             <if test="problemId != null">
@@ -101,8 +101,8 @@
             <if test="updateUser != null and updateUser != ''">
                 and update_user = #{updateUser}
             </if>
-            <if test="delete != null">
-                and delete = #{delete}
+            <if test="isDelete != null">
+                and is_delete = #{isDelete}
             </if>
         </where>
         limit #{pageable.offset}, #{pageable.pageSize}
@@ -161,8 +161,8 @@
             <if test="updateUser != null and updateUser != ''">
                 and update_user = #{updateUser}
             </if>
-            <if test="delete != null">
-                and delete = #{delete}
+            <if test="isDelete != null">
+                and is_delete = #{isDelete}
             </if>
         </where>
     </select>
@@ -171,29 +171,29 @@
     <insert id="insert" keyProperty="problemId" useGeneratedKeys="true">
         insert into problem(problem_name, problem_type, problem_address, problem_desc, problem_pic, problem_notes,
                             problem_status, confirm_user_id, confirm_user, deal_user_id, deal_user, create_time,
-                            update_time, create_user, update_user, delete)
+                            update_time, create_user, update_user, is_delete)
         values (#{problemName}, #{problemType}, #{problemAddress}, #{problemDesc}, #{problemPic}, #{problemNotes},
                 #{problemStatus}, #{confirmUserId}, #{confirmUser}, #{dealUserId}, #{dealUser}, #{createTime},
-                #{updateTime}, #{createUser}, #{updateUser}, #{delete})
+                #{updateTime}, #{createUser}, #{updateUser}, #{isDelete})
     </insert>
 
     <insert id="insertBatch" keyProperty="problemId" useGeneratedKeys="true">
         insert into problem(problem_name, problem_type, problem_address, problem_desc, problem_pic, problem_notes,
         problem_status, confirm_user_id, confirm_user, deal_user_id, deal_user, create_time, update_time, create_user,
-        update_user, delete)
+        update_user, is_delete)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.problemName}, #{entity.problemType}, #{entity.problemAddress}, #{entity.problemDesc},
             #{entity.problemPic}, #{entity.problemNotes}, #{entity.problemStatus}, #{entity.confirmUserId},
             #{entity.confirmUser}, #{entity.dealUserId}, #{entity.dealUser}, #{entity.createTime}, #{entity.updateTime},
-            #{entity.createUser}, #{entity.updateUser}, #{entity.delete})
+            #{entity.createUser}, #{entity.updateUser}, #{entity.isDelete})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="problemId" useGeneratedKeys="true">
         insert into problem(problem_name, problem_type, problem_address, problem_desc, problem_pic, problem_notes,
         problem_status, confirm_user_id, confirm_user, deal_user_id, deal_user, create_time, update_time, create_user,
-        update_user, delete)
+        update_user, is_delete)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.problemName}, #{entity.problemType}, #{entity.problemAddress}, #{entity.problemDesc},
@@ -217,7 +217,7 @@
         update_time = values(update_time),
         create_user = values(create_user),
         update_user = values(update_user),
-        delete = values(delete)
+        is_delete = values(isDelete)
     </insert>
 
     <!--通过主键修改数据-->
@@ -269,8 +269,8 @@
             <if test="updateUser != null and updateUser != ''">
                 update_user = #{updateUser},
             </if>
-            <if test="delete != null">
-                delete = #{delete},
+            <if test="isDelete != null">
+                is_delete = #{delete},
             </if>
         </set>
         where problem_id = #{problemId}
