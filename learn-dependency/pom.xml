@@ -48,10 +48,11 @@
         <elasticsearch.version>6.8.0</elasticsearch.version>
         <elasticsearch-rest-client.version>6.3.0</elasticsearch-rest-client.version>
         <delete-by-query.version>2.3.3</delete-by-query.version>
-<!--        <hadoop-common-shaded.version>1.1.3_shaded</hadoop-common-shaded.version>-->
+        <!--        <hadoop-common-shaded.version>1.1.3_shaded</hadoop-common-shaded.version>-->
         <alibaba.fastjson2.extension.version>2.0.22</alibaba.fastjson2.extension.version>
         <belerweb.pinyin4j.version>2.5.0</belerweb.pinyin4j.version>
         <junit.version>5.7.0</junit.version>
+        <jieba.version>1.0.2</jieba.version>
 
     </properties>
 
@@ -169,7 +170,6 @@
             </dependency>
 
 
-
             <dependency>
                 <groupId>com.lmax</groupId>
                 <artifactId>disruptor</artifactId>
@@ -223,9 +223,6 @@
                 <artifactId>caffeine</artifactId>
                 <version>${caffeine.version}</version>
             </dependency>
-
-
-
 
 
             <!-- CGLIB代码生成包，在内存中动态生成代码 -->
@@ -320,7 +317,6 @@
             </dependency>
 
 
-
             <dependency>
                 <groupId>com.alibaba.fastjson2</groupId>
                 <artifactId>fastjson2-extension-spring5</artifactId>
@@ -355,8 +351,16 @@
                 <version>${revision}</version>
             </dependency>
 
-        </dependencies>
 
+            <!-- https://mvnrepository.com/artifact/com.huaban/jieba-analysis -->
+            <dependency>
+                <groupId>com.huaban</groupId>
+                <artifactId>jieba-analysis</artifactId>
+                <version>${jieba.version}</version>
+            </dependency>
+
+
+        </dependencies>
 
 
     </dependencyManagement>
