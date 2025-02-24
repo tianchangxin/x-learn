@@ -27,13 +27,13 @@ import java.util.Objects;
 public class ProblemServiceImpl extends ServiceImpl<ProblemDao, Problem> implements ProblemService {
 
 
-
     @Override
     public PageVo<ProblemDto> queryProblemList(QueryProblemParam problemParam) {
         LambdaQueryWrapper<Problem> wrapper = new LambdaQueryWrapper<>();
         wrapper.like(Objects.nonNull(problemParam.getProblemName()), Problem::getProblemName, problemParam.getProblemName())
                 .eq(Objects.nonNull(problemParam.getProblemType()), Problem::getProblemType, problemParam.getProblemType())
                 .eq(Objects.nonNull(problemParam.getProblemStatus()), Problem::getProblemStatus, problemParam.getProblemStatus())
+                .eq(Objects.nonNull(problemParam.getDealUserId()), Problem::getDealUserId, problemParam.getDealUserId())
                 .eq(Objects.nonNull(problemParam.getIsDelete()), Problem::getIsDelete, problemParam.getIsDelete())
                 .orderByDesc(Problem::getProblemId);
         Page<Problem> page = Page.of(problemParam.getCurrentPage(), problemParam.getPageSize());

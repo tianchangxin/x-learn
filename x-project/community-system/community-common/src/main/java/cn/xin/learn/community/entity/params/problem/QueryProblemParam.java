@@ -24,6 +24,8 @@ public class QueryProblemParam extends PageParam {
     private String problemType;
     //问题状态（0-新增、1-指派、2-处理中、3-完成）
     private Integer problemStatus;
+    //处理人Id
+    private Integer dealUserId;
     //是否删除（0-未删除，1-删除）
     private Integer isDelete;
 }
