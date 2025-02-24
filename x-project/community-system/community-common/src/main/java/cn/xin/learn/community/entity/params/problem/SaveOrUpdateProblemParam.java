@@ -37,6 +37,8 @@ public class SaveOrUpdateProblemParam {
     private Integer confirmUserId;
     //确认人
     private String confirmUser;
+    //问题状态（0-新增、1-指派、2-处理中、3-完成）
+    private Integer problemStatus;
     //处理人Id
     @NotNull(message = "处理人不能为空")
     private Integer dealUserId;
