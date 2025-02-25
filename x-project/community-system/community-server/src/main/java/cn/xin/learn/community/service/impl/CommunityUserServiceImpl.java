@@ -1,6 +1,7 @@
 package cn.xin.learn.community.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.convert.Convert;
 import cn.xin.learn.community.checks.user.UserCheck;
 import cn.xin.learn.community.dao.CommunityUserDao;
 import cn.xin.learn.community.entity.dto.user.CommunityUserDto;
@@ -22,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * 社区用户表;(CommunityUser)表服务实现类
@@ -133,6 +135,22 @@ public class CommunityUserServiceImpl extends ServiceImpl<CommunityUserDao, Comm
             CommunityAssert.fail("用户名或密码错误");
         }
         return BeanUtil.copyProperties(communityUser, CommunityUserDto.class);
+    }
+
+
+    /**
+     * 不分页根据部门id获取用户信息
+     * @param deptId 社区id
+     * @return 用户信息
+     */
+    @Override
+    public List<CommunityUserDto> getUserinfoByDeptId(Integer deptId) {
+        LambdaQueryWrapper<CommunityUser> wrapper = new LambdaQueryWrapper<CommunityUser>()
+                .eq(CommunityUser::getDeptId, deptId);
+        List<CommunityUser> list = this.list(wrapper);
+        return list.stream()
+                .map(x -> Convert.convert(CommunityUserDto.class, x))
+                .collect(Collectors.toList());
     }
 }
 

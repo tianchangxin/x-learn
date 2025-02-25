@@ -58,5 +58,6 @@ public interface CommunityUserService extends IService<CommunityUser> {
     CommunityUserDto login(LoginUserParam param);
 
 
+    List<CommunityUserDto> getUserinfoByDeptId(Integer deptId);
 }
 
