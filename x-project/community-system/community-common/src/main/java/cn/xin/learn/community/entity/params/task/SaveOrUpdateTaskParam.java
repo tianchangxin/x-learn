@@ -46,6 +46,8 @@ public class SaveOrUpdateTaskParam {
     //部门名称
     @NotEmpty(message = "部门名称不能为空")
     private String deptName;
+    //执行人
+    private String executor;
     //领域类型
     private Integer domainType;
     //评价模版ID
