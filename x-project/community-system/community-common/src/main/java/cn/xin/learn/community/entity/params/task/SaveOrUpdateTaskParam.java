@@ -52,4 +52,6 @@ public class SaveOrUpdateTaskParam {
     private Integer domainType;
     //评价模版ID
     private Long templateId;
+    //任务状态（0-创建、1-执行中、2-完成）
+    private Integer taskStatus;
 }

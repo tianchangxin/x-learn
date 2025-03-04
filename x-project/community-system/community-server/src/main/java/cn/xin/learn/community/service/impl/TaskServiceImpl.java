@@ -16,6 +16,7 @@ import cn.xin.learn.community.entity.po.Task;
 import cn.xin.learn.community.entity.po.UserCommentTemplate;
 import cn.xin.learn.community.entity.vo.PageVo;
 import cn.xin.learn.community.helpers.UserHelper;
+import cn.xin.learn.community.service.CommunityUserService;
 import cn.xin.learn.community.service.TaskService;
 import cn.xin.learn.community.service.UserCommentTemplateService;
 import com.alibaba.druid.support.json.JSONUtils;
@@ -44,6 +45,12 @@ public class TaskServiceImpl extends ServiceImpl<TaskDao, Task> implements TaskS
     @Autowired
     private UserCommentTemplateService userCommentTemplateService;
 
+    @Autowired
+    private CommunityUserService communityUserService;
+
+    @Autowired
+    private TaskDao taskDao;
+
 
     /**
      * 根据人物名模糊查询，或者根据任务状态、任务类型分页查询
@@ -52,11 +59,16 @@ public class TaskServiceImpl extends ServiceImpl<TaskDao, Task> implements TaskS
      */
     @Override
     public PageVo<TaskDto> queryTaskInfo(QueryTaskParam taskParam){
+        CommunityUser communityUser=new CommunityUser();
+        if(Objects.nonNull(taskParam.getUserId())){
+             communityUser = communityUserService.getById(taskParam.getUserId());
+        }
         LambdaQueryWrapper<Task> wrapper = new LambdaQueryWrapper<>();
         wrapper.like(Objects.nonNull(taskParam.getTaskName()),Task::getTaskName,taskParam.getTaskName())
                 .eq(Objects.nonNull(taskParam.getTaskType()),Task::getTaskType,taskParam.getTaskType())
                 .eq(Objects.nonNull(taskParam.getTaskStatus()),Task::getTaskStatus,taskParam.getTaskStatus())
-                .orderByDesc(Task::getTaskId);
+                .orderByDesc(Task::getTaskId)
+                .eq(Objects.nonNull(taskParam.getUserId()),Task::getExecutor,communityUser.getUserName());
         Page<Task> page = Page.of(taskParam.getCurrentPage(), taskParam.getPageSize());
         page = this.page(page, wrapper);
         List<TaskDto> taskDtos = BeanUtil.copyToList(page.getRecords(), TaskDto.class);
@@ -73,10 +85,16 @@ public class TaskServiceImpl extends ServiceImpl<TaskDao, Task> implements TaskS
     public Boolean saveOrUpdateTaskInfo(SaveOrUpdateTaskParam taskParam){
         Task task = new Task();
         BeanUtil.copyProperties(taskParam,task);
+        task.setTemplateId(taskParam.getTemplateId());
+        //新增
         if(Objects.isNull(task.getTaskId())){
             task.setTaskStatus(0);
+            return taskDao.insertTask(task);
         }
-        return this.saveOrUpdate(task);
+        // 编辑
+        else{
+            return this.updateById(task);
+        }
     }
 
     @Override

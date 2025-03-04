@@ -22,6 +22,16 @@
         <result property="templateId" column="template_id" jdbcType="INTEGER"/>
     </resultMap>
 
+    <insert id="insertTask" keyProperty="taskId" useGeneratedKeys="true">
+        insert into task
+        (task_name, task_type, start_time, end_time, dept_id, dept_name, executor, domain_type, task_status,
+        task_content, create_time, update_time, create_user, update_user, is_delete, template_id)
+        values
+        (#{taskName}, #{taskType}, #{startTime}, #{endTime}, #{deptId}, #{deptName}, #{executor}
+        , #{domainType},#{taskStatus}, #{taskContent}, #{createTime}, #{updateTime}, #{createUser}
+        , #{updateUser}, #{isDelete}, #{templateId})
+    </insert>
+
     <!--查询单个-->
     <select id="queryById" resultMap="TaskMap">
         select task_id,
@@ -253,6 +263,9 @@
             </if>
             <if test="isDelete != null">
                 is_delete = #{isDelete},
+            </if>
+            <if test="templateId != null">
+                template_id = #{templateId},
             </if>
         </set>
         where task_id = #{taskId}
