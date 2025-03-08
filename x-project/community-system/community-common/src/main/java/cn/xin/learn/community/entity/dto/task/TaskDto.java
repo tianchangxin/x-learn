@@ -48,4 +48,6 @@ public class TaskDto {
     private String createUser;
     //修改用户
     private String updateUser;
+    //模板id
+    private Long templateId;
 }

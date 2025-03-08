@@ -32,4 +32,6 @@ public class QueryTaskParam extends PageParam {
     private Date endTime;
     //任务状态（0-创建、1-执行中、2-完成）
     private Integer taskStatus;
+    //用户ID
+    private Integer userId;
 }
