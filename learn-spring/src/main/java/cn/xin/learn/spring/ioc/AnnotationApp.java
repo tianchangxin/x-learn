@@ -1,6 +1,6 @@
 package cn.xin.learn.spring.ioc;
 
-import cn.xin.learn.spring.ioc.entity.User;
+import cn.xin.learn.spring.ioc.entity.PersonBean;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class AnnotationApp {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
-        User bean = context.getBean(User.class);
+        PersonBean bean = context.getBean(PersonBean.class);
         System.out.println(bean);
         context.close();
     }
