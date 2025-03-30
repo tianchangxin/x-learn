@@ -51,6 +51,14 @@ public class IntegralController {
     }
 
     /**
+     * 查询用户总积分
+     */
+    @GetMapping("queryUserTotalIntegral")
+    public Double queryUserIntegral(Long userId) {
+        return integralService.queryUserIntegral(userId);
+    }
+
+    /**
      * 删除积分记录
      */
     @GetMapping("deleteIntegral")

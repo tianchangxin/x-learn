@@ -52,4 +52,9 @@ public class UserCommentTemplate extends BasePo {
      */
     private String templateRemark;
 
+    /**
+     * 任务Id
+     */
+    private Long taskId;
+
 }

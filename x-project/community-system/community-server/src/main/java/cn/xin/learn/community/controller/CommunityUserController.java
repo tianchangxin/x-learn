@@ -70,5 +70,14 @@ public class CommunityUserController {
     public Boolean deleteUser(@RequestBody List<Long> userIds) {
         return communityUserService.deleteUser(userIds);
     }
+
+
+    /**
+     * 根据部门ID获取用户信息
+     */
+    @PostMapping("getUserinfoByDeptId")
+    public List<CommunityUserDto> getUserinfoByDeptId(Integer deptId) {
+        return communityUserService.getUserinfoByDeptId(deptId);
+    }
 }
 

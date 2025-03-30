@@ -17,7 +17,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class SaveUpdateDepartmentParam {
     //组织id(新增时不传，更新时传)
-    @NotNull(message = "组织id不能为空")
     private Long deptId;
     //部门名称
     @NotEmpty(message = "部门名称不能为空")

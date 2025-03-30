@@ -1,6 +1,7 @@
 package cn.xin.learn.community.entity.po;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
 
 /**
  * 问题;(Problem)表实体类
@@ -9,6 +10,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
  * @since 2024-12-24 15:42:26
  */
 @SuppressWarnings("serial")
+@Data
 public class Problem extends BasePo {
     //问题ID
     @TableId
@@ -35,6 +37,8 @@ public class Problem extends BasePo {
     private Integer dealUserId;
     //处理人
     private String dealUser;
+    //是否删除（0-未删除，1-删除）
+    private Integer isDelete;
 
 }
 

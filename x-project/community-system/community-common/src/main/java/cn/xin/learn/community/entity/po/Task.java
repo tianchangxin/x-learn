@@ -1,6 +1,11 @@
 package cn.xin.learn.community.entity.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -10,10 +15,13 @@ import java.util.Date;
  * @author makejava
  * @since 2024-12-24 15:42:28
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @SuppressWarnings("serial")
 public class Task extends BasePo {
     //任务ID
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer taskId;
     //任务名称
     private String taskName;
@@ -35,5 +43,9 @@ public class Task extends BasePo {
     private Integer taskStatus;
     //任务内容
     private String taskContent;
+
+    @TableField("template_id")
+    //模板id
+    private Long templateId;
 }
 

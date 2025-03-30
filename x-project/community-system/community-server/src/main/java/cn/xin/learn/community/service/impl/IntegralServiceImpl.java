@@ -6,10 +6,13 @@ import cn.xin.learn.community.entity.dto.integral.IntegralDto;
 import cn.xin.learn.community.entity.params.integral.PageIntegralParam;
 import cn.xin.learn.community.entity.params.integral.QueryIntegralParam;
 import cn.xin.learn.community.entity.params.integral.SaveUpdateIntegralParam;
+import cn.xin.learn.community.entity.po.CommunityUser;
 import cn.xin.learn.community.entity.po.Integral;
 import cn.xin.learn.community.entity.vo.PageVo;
 import cn.xin.learn.community.enums.IntegralEnums;
+import cn.xin.learn.community.enums.RolesEnum;
 import cn.xin.learn.community.exceptions.asserts.CommunityAssert;
+import cn.xin.learn.community.helpers.UserHelper;
 import cn.xin.learn.community.service.IntegralService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -54,11 +57,15 @@ public class IntegralServiceImpl extends ServiceImpl<IntegralDao, Integral> impl
     @Transactional(rollbackFor = Exception.class)
     @Override
     public PageVo<IntegralDto> queryIntegralPage(PageIntegralParam param) {
-        CommunityAssert.notNull(param.getBelongUserId(), "所属用户ID不能为空");
+        CommunityUser currentUser = UserHelper.getCurrentUser();
+        if (Objects.equals(currentUser.getSuperAdmin(), RolesEnum.REGULAR_USER.getCode())) {
+            //普通用户需要校验所属用户ID，超管不用
+            CommunityAssert.notNull(param.getBelongUserId(), "所属用户ID不能为空");
+        }
         //查询条件,【查询条件可能会有变动】
         LambdaQueryWrapper<Integral> wrapper = new LambdaQueryWrapper<Integral>()
                 .eq(StringUtils.isNotEmpty(param.getIntegralOrigin()), Integral::getIntegralOrigin, param.getIntegralOrigin())
-                .eq(Integral::getBelongUserId, param.getBelongUserId())
+                .eq(Objects.nonNull(param.getBelongUserId()), Integral::getBelongUserId, param.getBelongUserId())
                 .eq(Objects.nonNull(param.getIntegralType()), Integral::getIntegralType, param.getIntegralType());
 
         Page<Integral> page = Page.of(param.getCurrentPage(), param.getPageSize());

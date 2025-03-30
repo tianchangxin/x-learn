@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 @Slf4j
 public class SaveUpdateRoleParam {
     //角色ID（新增时不传，修改时传）
-    private Integer roleId;
+    private Long roleId;
     //角色名称
     @NotEmpty(message = "角色名称不能为空")
     private String roleName;
