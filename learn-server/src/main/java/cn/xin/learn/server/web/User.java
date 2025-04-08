@@ -21,6 +21,7 @@ package cn.xin.learn.server.web;
  */
 public class User {
 
+
     private String name;
 
     private Integer age;
