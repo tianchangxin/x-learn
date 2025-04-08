@@ -27,7 +27,7 @@ public class UserCheck {
         CommunityAssert.notNull(userInfo.getUserSex(), "性别不能为空");
         CommunityAssert.notEmpty(userInfo.getEmail(), "邮箱不能为空");
         CommunityAssert.notEmpty(userInfo.getRole(), "角色不能为空");
-        CommunityAssert.notNull(userInfo.getDeptId(), "部门id不能为空");
+//        CommunityAssert.notNull(userInfo.getDeptId(), "部门id不能为空");
         CommunityAssert.notNull(userInfo.getSuperAdmin(), "是否超管不能为空");
         CommunityAssert.notNull(userInfo.getStatus(), "用户状态不能为空");
     }

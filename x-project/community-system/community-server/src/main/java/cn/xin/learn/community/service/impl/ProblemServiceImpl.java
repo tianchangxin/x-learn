@@ -34,6 +34,7 @@ public class ProblemServiceImpl extends ServiceImpl<ProblemDao, Problem> impleme
                 .eq(Objects.nonNull(problemParam.getProblemType()), Problem::getProblemType, problemParam.getProblemType())
                 .eq(Objects.nonNull(problemParam.getProblemStatus()), Problem::getProblemStatus, problemParam.getProblemStatus())
                 .eq(Objects.nonNull(problemParam.getDealUserId()), Problem::getDealUserId, problemParam.getDealUserId())
+                .eq(Objects.nonNull(problemParam.getCreateUser()),Problem::getCreateUser,problemParam.getCreateUser())
                 .eq(Objects.nonNull(problemParam.getIsDelete()), Problem::getIsDelete, problemParam.getIsDelete())
                 .orderByDesc(Problem::getProblemId);
         Page<Problem> page = Page.of(problemParam.getCurrentPage(), problemParam.getPageSize());
