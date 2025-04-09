@@ -1,8 +1,6 @@
 package cn.xin.learn.community.entity.params.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -10,13 +8,13 @@ import lombok.extern.slf4j.Slf4j;
  * @description: 保存或者更新用户参数
  * @date 2024年12月29日
  */
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Slf4j
 public class SaveUpdateUserParam {
     //用户ID（新增时不传，修改时传）
-    private Integer userId;
+    private Long userId;
     //用户名
     private String userName;
     //密码
