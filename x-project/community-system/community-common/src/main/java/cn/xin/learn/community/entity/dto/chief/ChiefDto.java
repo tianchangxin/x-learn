@@ -32,4 +32,6 @@ public class ChiefDto {
     private Date updateTime;
     //修改用户
     private String updateUser;
+    //是否发布（0:已发布，1：未发布）
+    private Integer isPublish;
 }

@@ -31,7 +31,7 @@ public class ChiefServiceImpl extends ServiceImpl<ChiefDao, Chief> implements Ch
         wrapper.like(Objects.nonNull(chiefParam.getChiefTitle()),Chief::getChiefTitle,chiefParam.getChiefTitle())
                 .eq(Objects.nonNull(chiefParam.getChiefType()),Chief::getChiefType,chiefParam.getChiefType())
                 .like(Objects.nonNull(chiefParam.getChiefContent()),Chief::getChiefContent,chiefParam.getChiefContent())
-                .eq(Chief::getIsPublish,0)
+                .eq(Objects.nonNull(chiefParam.getIsPublish()),Chief::getIsPublish,chiefParam.getIsPublish())
                 .orderByDesc(Chief::getChiefId);
         Page<Chief> page = Page.of(chiefParam.getCurrentPage(), chiefParam.getPageSize());
         page = this.page(page, wrapper);
@@ -45,7 +45,7 @@ public class ChiefServiceImpl extends ServiceImpl<ChiefDao, Chief> implements Ch
     @Override
     public Boolean saveOrUpdateChief(SaveOrUpdateChiefParam chiefParam) {
         Chief chief = new Chief();
-        if (Objects.nonNull(chiefParam.getChiefId())) {
+        if (Objects.isNull(chiefParam.getChiefId())) {
             chiefParam.setIsPublish(1);
         }
         BeanUtil.copyProperties(chiefParam, chief);
