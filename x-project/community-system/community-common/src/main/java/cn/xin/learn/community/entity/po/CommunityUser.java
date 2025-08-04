@@ -3,8 +3,7 @@ package cn.xin.learn.community.entity.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 /**
  * 社区用户表;(CommunityUser)表实体类
@@ -12,9 +11,10 @@ import lombok.EqualsAndHashCode;
  * @author makejava
  * @since 2024-12-24 15:42:22
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
-@SuppressWarnings("serial")
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CommunityUser extends BasePo {
     //用户ID
     @TableId(type = IdType.AUTO)

@@ -18,6 +18,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +35,9 @@ import java.util.stream.Collectors;
 @Service("communityUserService")
 public class CommunityUserServiceImpl extends ServiceImpl<CommunityUserDao, CommunityUser> implements CommunityUserService {
 
+    @Autowired
+    private CommunityUserDao communityUserDao;
+
     /**
      * 新增或者修改用户
      *
@@ -44,7 +48,13 @@ public class CommunityUserServiceImpl extends ServiceImpl<CommunityUserDao, Comm
     public Boolean saveOrUpdateUser(SaveUpdateUserParam param) {
         CommunityUser communityUser = new CommunityUser();
         BeanUtils.copyProperties(param, communityUser);
-        return this.saveOrUpdate(communityUser);
+        communityUser.setUserId(param.getUserId());
+        if(Objects.nonNull(param.getUserId())){
+            return communityUserDao.updateById(communityUser)>0;
+        }
+        else{
+           return communityUserDao.insert(communityUser)>0;
+        }
     }
 
     /**

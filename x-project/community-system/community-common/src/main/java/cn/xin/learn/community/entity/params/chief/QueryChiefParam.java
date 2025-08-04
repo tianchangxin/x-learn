@@ -23,4 +23,6 @@ public class QueryChiefParam extends PageParam {
     private Integer chiefType;
     //政务内容
     private String chiefContent;
+    //是否发布（0:已发布，1：未发布）
+    private Integer isPublish;
 }
