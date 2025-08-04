@@ -14,5 +14,6 @@ public class ExistBossConditon implements Condition {
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
         return context.getBeanFactory().containsBeanDefinition(Boss.class.getName());
+
     }
 }
