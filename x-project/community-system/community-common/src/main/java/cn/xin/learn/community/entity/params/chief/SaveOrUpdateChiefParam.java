@@ -31,4 +31,6 @@ public class SaveOrUpdateChiefParam {
     private String chiefContent;
     //政务标题图片
     private String chiefPic;
+    //是否发布（0:已发布，1：未发布）
+    private Integer isPublish;
 }

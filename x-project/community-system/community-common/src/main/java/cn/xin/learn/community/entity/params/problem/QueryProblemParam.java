@@ -1,6 +1,8 @@
 package cn.xin.learn.community.entity.params.problem;
 
 import cn.xin.learn.community.entity.params.PageParam;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,4 +30,6 @@ public class QueryProblemParam extends PageParam {
     private Integer dealUserId;
     //是否删除（0-未删除，1-删除）
     private Integer isDelete;
+    //创建用户
+    private String createUser;
 }

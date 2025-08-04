@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * @Title: ChiefDto
  * @Author yinan
@@ -26,4 +28,10 @@ public class ChiefDto {
     private String chiefContent;
     //政务标题图片
     private String chiefPic;
+    //修改时间
+    private Date updateTime;
+    //修改用户
+    private String updateUser;
+    //是否发布（0:已发布，1：未发布）
+    private Integer isPublish;
 }
