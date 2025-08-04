@@ -2,9 +2,7 @@ package com.ztc.learn.mybatis.mapper;
 
 import com.ztc.learn.mybatis.modle.domain.User;
 import org.apache.ibatis.annotations.Mapper;
-
 import org.apache.ibatis.annotations.Param;
-
 
 import java.util.List;
 
@@ -21,7 +19,7 @@ public interface UserMapper {
 
     List<User> queryUserByRole(String role);
 
-    List<User> queryUser(Integer id, String username, @Param("myEmail") String email);
+    List<User> queryUser(@Param("id") Integer id, @Param("username") String username, @Param("myEmail") String email);
 
     User queryUserById(Integer id);
 
