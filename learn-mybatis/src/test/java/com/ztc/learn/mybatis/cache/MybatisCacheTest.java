@@ -31,12 +31,12 @@ public class MybatisCacheTest {
     public void init() {
         String source = "mybatis-config.xml";
         InputStream inputStream = null;
-        try{
+        try {
             inputStream = Resources.getResourceAsStream(source);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        sqlSessionFactory= new SqlSessionFactoryBuilder().build(inputStream);
+        sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
     }
 
     /**
@@ -44,21 +44,29 @@ public class MybatisCacheTest {
      */
     @Test
     public void testFirstLevelCache() {
-        try(SqlSession session = sqlSessionFactory.openSession(true)){
+        try (SqlSession session = sqlSessionFactory.openSession(true)) {
             log.info("✨连接成功");
             UserMapper mapper = session.getMapper(UserMapper.class);
 
-            List<User> jerry1 = mapper.queryUser(1, "Jerry", "123");
-            log.info("jerry1 = {},hashCode:{}", jerry1,jerry1.hashCode());
-            List<User> jerry2 = mapper.queryUser(1, "Jerry", "123");
-            log.info("jerry2 = {},hashCode:{}", jerry2,jerry2.hashCode());
+            List<User> jerry1 = mapper.queryUser(10740012, "马詩涵", "mashiha@icloud.com");
+            log.info("jerry1 = {},hashCode:{}", jerry1, jerry1.hashCode());
+            List<User> jerry2 = mapper.queryUser(10740012, "马詩涵", "mashiha@icloud.com");
+            log.info("jerry2 = {},hashCode:{}", jerry2, jerry2.hashCode());
             Assertions.assertArrayEquals(jerry1.toArray(), jerry2.toArray());
-
             UserMapper mapper1 = session.getMapper(UserMapper.class);
-            List<User> jerry3 = mapper1.queryUser(1, "Jerry", "123");
-            log.info("jerry3 = {},hashCode:{}", jerry3,jerry3.hashCode());
+            List<User> jerry3 = mapper1.queryUser(10740012, "马詩涵", "mashiha@icloud.com");
+            log.info("jerry3 = {},hashCode:{}", jerry3, jerry3.hashCode());
             Assertions.assertArrayEquals(jerry1.toArray(), jerry3.toArray());
-        };
+        }
+
+        try (SqlSession session = sqlSessionFactory.openSession(true)) {
+            log.info("✨连接成功");
+            UserMapper mapper = session.getMapper(UserMapper.class);
+
+            List<User> jerry1 = mapper.queryUser(10740012, "马詩涵", "mashiha@icloud.com");
+            log.info("jerry1 = {},hashCode:{}", jerry1, jerry1.hashCode());
+        }
+        ;
     }
 
     /**
@@ -66,7 +74,7 @@ public class MybatisCacheTest {
      */
     @Test
     public void testFirstLevelCache2() {
-        try(SqlSession session = sqlSessionFactory.openSession()){
+        try (SqlSession session = sqlSessionFactory.openSession()) {
             UserMapper mapper = session.getMapper(UserMapper.class);
             User user1 = mapper.queryUserById(1);
             Assertions.assertEquals("admin", user1.getUsername());

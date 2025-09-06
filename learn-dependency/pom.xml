@@ -44,7 +44,6 @@
         <commons-io.version>2.11.0</commons-io.version>
         <google-http-client.version>1.21.0</google-http-client.version>
         <spring.boot.web.version>2.4.4</spring.boot.web.version>
-        <lettuce.lettuce-core.version>5.2.1.RELEASE</lettuce.lettuce-core.version>
         <elasticsearch.version>6.8.0</elasticsearch.version>
         <elasticsearch-rest-client.version>6.3.0</elasticsearch-rest-client.version>
         <delete-by-query.version>2.3.3</delete-by-query.version>
@@ -54,6 +53,7 @@
         <junit.version>5.7.0</junit.version>
         <jieba.version>1.0.2</jieba.version>
         <!--        <easyexcel.version>3.0.6</easyexcel.version>-->
+        <spring-boot-starter-data-redis.version>3.5.3</spring-boot-starter-data-redis.version>
 
     </properties>
 
@@ -239,11 +239,6 @@
                 <version>${google-http-client.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>io.lettuce</groupId>
-                <artifactId>lettuce-core</artifactId>
-                <version>${lettuce.lettuce-core.version}</version>
-            </dependency>
 
             <!-- Elastic Search -->
             <dependency>
@@ -365,6 +360,12 @@
             <!--                <artifactId>easyexcel</artifactId>-->
             <!--                <version>${easyexcel.version}</version>-->
             <!--            </dependency>-->
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring-boot-starter-data-redis.version}</version>
+            </dependency>
 
 
         </dependencies>

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TcxService {
-    public final static TcxService instance = new TcxService();
 
     public TcxService() {
         System.out.println("TcxService init");
@@ -20,12 +19,6 @@ public class TcxService {
      */
     public void show() {
         System.out.println("TcxService show");
-    }
-
-    public static void main(String[] args) {
-        TcxService service = TcxService.instance;
-        TcxService service2 = TcxService.instance;
-
     }
 
 

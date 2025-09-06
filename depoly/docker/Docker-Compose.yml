@@ -1,0 +1,155 @@
+version: "3.8"
+services:
+  redis-node-1:
+    image: redis:7.2
+    container_name: redis-node-1
+    ports:
+      - "7001:6379"
+      - "17001:16379"
+    command:
+      - redis-server
+      - /usr/local/etc/redis/redis.conf
+      - --cluster-announce-ip
+      - 192.168.68.189
+      - --cluster-announce-port
+      - "7001"
+      - --cluster-announce-bus-port
+      - "17001"
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./node1:/data
+    networks:
+      - redis-cluster
+
+  redis-node-2:
+    image: redis:7.2
+    container_name: redis-node-2
+    ports:
+      - "7002:6379"
+      - "17002:16379"
+    command:
+      - redis-server
+      - /usr/local/etc/redis/redis.conf
+      - --cluster-announce-ip
+      - 192.168.68.189
+      - --cluster-announce-port
+      - "7002"
+      - --cluster-announce-bus-port
+      - "17002"
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./node2:/data
+    networks:
+      - redis-cluster
+
+  redis-node-3:
+    image: redis:7.2
+    container_name: redis-node-3
+    ports:
+      - "7003:6379"
+      - "17003:16379"
+    command:
+      - redis-server
+      - /usr/local/etc/redis/redis.conf
+      - --cluster-announce-ip
+      - 192.168.68.189
+      - --cluster-announce-port
+      - "7003"
+      - --cluster-announce-bus-port
+      - "17003"
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./node3:/data
+    networks:
+      - redis-cluster
+
+  redis-node-4:
+    image: redis:7.2
+    container_name: redis-node-4
+    ports:
+      - "7004:6379"
+      - "17004:16379"
+    command:
+      - redis-server
+      - /usr/local/etc/redis/redis.conf
+      - --cluster-announce-ip
+      - 192.168.68.189
+      - --cluster-announce-port
+      - "7004"
+      - --cluster-announce-bus-port
+      - "17004"
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./node4:/data
+    networks:
+      - redis-cluster
+
+  redis-node-5:
+    image: redis:7.2
+    container_name: redis-node-5
+    ports:
+      - "7005:6379"
+      - "17005:16379"
+    command:
+      - redis-server
+      - /usr/local/etc/redis/redis.conf
+      - --cluster-announce-ip
+      - 192.168.68.189
+      - --cluster-announce-port
+      - "7005"
+      - --cluster-announce-bus-port
+      - "17005"
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./node5:/data
+    networks:
+      - redis-cluster
+
+  redis-node-6:
+    image: redis:7.2
+    container_name: redis-node-6
+    ports:
+      - "7006:6379"
+      - "17006:16379"
+    command:
+      - redis-server
+      - /usr/local/etc/redis/redis.conf
+      - --cluster-announce-ip
+      - 192.168.68.189
+      - --cluster-announce-port
+      - "7006"
+      - --cluster-announce-bus-port
+      - "17006"
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./node6:/data
+    networks:
+      - redis-cluster
+
+  redis-cluster-creator:
+    image: redis:7.2
+    depends_on:
+      - redis-node-1
+      - redis-node-2
+      - redis-node-3
+      - redis-node-4
+      - redis-node-5
+      - redis-node-6
+    entrypoint: [ "sh", "-c", "
+      sleep 5 && \
+      echo yes | redis-cli --cluster create \
+        192.168.68.189:7001 \
+        192.168.68.189:7002 \
+        192.168.68.189:7003 \
+        192.168.68.189:7004 \
+        192.168.68.189:7005 \
+        192.168.68.189:7006 \
+        --cluster-replicas 1
+      && tail -f /dev/null
+    " ]
+    networks:
+      - redis-cluster
+
+networks:
+  redis-cluster:
+    driver: bridge

@@ -5,21 +5,22 @@
 <mapper namespace="com.ztc.learn.mybatis.mapper.UserMapper">
 
     <resultMap id="BaseResultMap" type="com.ztc.learn.mybatis.modle.domain.User">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="username" column="username" jdbcType="VARCHAR"/>
-            <result property="password" column="password" jdbcType="VARCHAR"/>
-            <result property="email" column="email" jdbcType="VARCHAR"/>
-            <result property="phone" column="phone" jdbcType="VARCHAR"/>
-            <result property="address" column="address" jdbcType="VARCHAR"/>
-            <result property="sex" column="sex" jdbcType="TINYINT"/>
-            <result property="realName" column="real_name" jdbcType="VARCHAR"/>
-            <result property="role" column="role" jdbcType="VARCHAR"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="TINYINT"/>
+        <result property="realName" column="real_name" jdbcType="VARCHAR"/>
+        <result property="role" column="role" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,username,password,
+        id
+        ,username,password,
         email,phone,address,
         sex,real_name,role,
         create_time,update_time
@@ -41,33 +42,41 @@
     </update>
 
     <select id="queryUserByRole" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/>
+        select
+        <include refid="Base_Column_List"/>
         from user
         where role = #{role}
         limit 0,10
     </select>
 
 
-    <select id="queryUser" resultType="com.ztc.learn.mybatis.modle.domain.User" >
+    <cache/>
+    <select id="queryUser" resultType="com.ztc.learn.mybatis.modle.domain.User">
 
-       select * from user
-       <where>
-           <if test="id != null and id != ''">
+        select * from user
+        <where>
+            <if test="id != null and id != ''">
                 id = #{id}
-           </if>
-           <if test="username != null and username != ''">
-                 and username != #{username}
-           </if>
-       </where>
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+        </where>
     </select>
     <select id="queryUserById" resultType="com.ztc.learn.mybatis.modle.domain.User">
-        select * from user where id = #{id}
+        select *
+        from user
+        where id = #{id}
     </select>
     <select id="queryUserPre" parameterType="integer" resultType="com.ztc.learn.mybatis.modle.domain.User">
-        select * from user where id = #{id}
+        select *
+        from user
+        where id = #{id}
     </select>
     <select id="queryUserByName" resultType="com.ztc.learn.mybatis.modle.domain.User">
-        select * from user where username = #{name}
+        select *
+        from user
+        where username = #{name}
     </select>
 
 

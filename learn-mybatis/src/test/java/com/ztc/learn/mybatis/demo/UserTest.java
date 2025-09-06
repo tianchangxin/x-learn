@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 /**
  * @author tiancx
@@ -20,7 +19,7 @@ import java.util.List;
 public class UserTest {
 
     @Test
-    public void testUser(){
+    public void testUser() {
         String source = "mybatis-config.xml";
         InputStream resourceAsStream = null;
         try {
@@ -39,4 +38,6 @@ public class UserTest {
         User queried = mapper.queryUserByName("花时");
         System.out.println(queried);
     }
+
+    
 }

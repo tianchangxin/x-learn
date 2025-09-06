@@ -2,7 +2,6 @@ package com.ztc.learn.mybatis;
 
 import com.ztc.learn.mybatis.mapper.UserMapper;
 import com.ztc.learn.mybatis.modle.domain.User;
-import com.ztc.learn.mybatis.simple.SimpleDemo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -39,18 +38,19 @@ public class MybatisDemoTest {
         String source = "mybatis-config.xml";
 
         InputStream inputStream = null;
-        try{
+        try {
             inputStream = Resources.getResourceAsStream(source);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        try(SqlSession session = sqlSessionFactory.openSession()){
+        try (SqlSession session = sqlSessionFactory.openSession()) {
             log.info("✨连接成功");
             UserMapper mapper = session.getMapper(UserMapper.class);
-            List<User> jerry = mapper.queryUser(1, "Jerry", "123");
+            List<User> jerry = mapper.queryUser(12000000, "Li Jialun", "jialunl827@hotmail.com");
             log.info("admin = {}", jerry);
-        };
+        }
+        ;
     }
 
 
@@ -58,13 +58,13 @@ public class MybatisDemoTest {
     public void testSession() {
         String source = "mybatis-config.xml";
         InputStream inputStream = null;
-        try{
+        try {
             inputStream = Resources.getResourceAsStream(source);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        try(SqlSession session = sqlSessionFactory.openSession()){
+        try (SqlSession session = sqlSessionFactory.openSession()) {
 
             log.info("✨连接成功");
             //设置查询参数
@@ -79,6 +79,6 @@ public class MybatisDemoTest {
             UserMapper mapper = session.getMapper(UserMapper.class);
             List<User> admin = mapper.queryUserByRole("1");
             log.info("admin = {}", admin);
-        };
+        }
     }
 }
